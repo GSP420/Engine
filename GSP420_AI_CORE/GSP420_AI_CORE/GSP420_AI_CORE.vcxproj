@@ -61,6 +61,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="AIInterface.h" />
     <ClInclude Include="AISystem.h" />
     <ClInclude Include="Behavior.h" />
     <ClInclude Include="Evade.h" />

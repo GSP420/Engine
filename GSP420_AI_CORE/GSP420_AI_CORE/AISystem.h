@@ -21,20 +21,22 @@ class AISystem
 {
 	private:
 		Agent* player;
+		int	id;
 		hash_map<int, Behavior*> agents;					// a list of registered behaviors for
 		hash_map<int, Behavior*>::iterator agentIterator;	// list iterator
 
 	public:
 		AISystem(Agent*);					// constructor
 		void AI_Update();					// called to update all agents
-		void registerAgent(int, Behavior*);	// register an agent with the AI system
-		void unregisterAgent(int);			// remove an agent from the AI system
+		void registerAgent(GenericEnemy entity, Behavior*);	// register an agent with the AI system
+		void unregisterAgent(GenericEnemy entity);			// remove an agent from the AI system
 };
 
 AISystem::AISystem(Agent* playerAgent)
 {	
 	player = playerAgent;
 	srand(time(NULL));
+	id = 0;
 }
 
 void AISystem::AI_Update()
@@ -51,13 +53,16 @@ void AISystem::AI_Update()
 	}
 }
 
-void AISystem::registerAgent(int agentId, Behavior* behavior)
+void AISystem::registerAgent(GenericEnemy agent, Behavior* behavior)
 {	// add a new agent to the AI system
-	agents[agentId] = behavior;
+	agent.self->setAgentId(id++);
+	agents[id] = behavior;
 }
 
-void AISystem::unregisterAgent(int agentId)
+void AISystem::unregisterAgent(GenericEnemy agent)
 {	//remove an agent, typically because it is destroyed
-	delete agents[agentId];
-	agents.erase(agentId);
+	int temp = 0;
+	agent.self->getAgentId(temp);
+	delete agents[temp];
+	agents.erase(temp);
 }

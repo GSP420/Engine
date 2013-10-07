@@ -12,6 +12,7 @@ class Agent
 		float position[3];
 		float velocity[3];
 		float destination[3];
+		int		agentId;
 	public:
 		Agent();
 		float getOrientation();
@@ -23,4 +24,6 @@ class Agent
 		void setVelocity(float[3]);
 		void getDestination(float[3]);
 		void setDestination(float[3]);
+		void setAgentId(int);
+		void getAgentId(int);
 };

@@ -14,7 +14,7 @@
 class GenericEnemy : public Behavior
 {
 	private:
-		Agent* self;
+		
 		State* currentState;
 	public:
 		GenericEnemy(Agent*);
@@ -22,4 +22,5 @@ class GenericEnemy : public Behavior
 		void assessEnvironment(void* player);
 		void behave();
 		int distance(float[3],float[3]);
+		Agent* self;
 };
