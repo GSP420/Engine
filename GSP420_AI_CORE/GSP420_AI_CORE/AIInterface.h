@@ -1,3 +1,4 @@
+#pragma once
 #include"ICore.h"
 #include"AISystem.h"
 #include"Agent.h"

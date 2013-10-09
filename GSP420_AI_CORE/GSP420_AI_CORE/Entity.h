@@ -3,15 +3,16 @@
 #pragma once
 // #include "*header*.h"   include header for rendering class
 #include <string>
+#include"Agent.h"
 
 class Entity
 {
 public:
 	//pass animation through
 	//*header* *animation*;	
-	int x;
-	int y;
+	float position[3];
 	int eID;					//animation ID
+	Agent agentData;
 
 	std::string type;
 	std::string name;
