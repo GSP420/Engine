@@ -3,7 +3,8 @@
 #include "MessageManager.h"
 #include "EntityManager.h"
 #include "Clock.h"
-#include"AIInterface.h"
+#include "AIInterface.h"
+#include "AudioCore.h"
 
 
 class MainCore : public ICore
@@ -13,6 +14,10 @@ private:
 	EntityManager *entityManager;
 	Clock *clock;
 	AIInterface*	AIManager;
+	Sound* AudioCoreSound;
+	SoundEffect* AudioCoreSoundEffect;
+	
+
 public:
 
 	MainCore(void);
@@ -26,4 +31,6 @@ public:
 	EntityManager* GetEntityManager() { return this->entityManager; }
 	Clock* GetClock() { return this->clock; }
 	AIInterface*	GetAIManager() {return this->AIManager;}
+	Sound* GetAudioCoreSound() {return this->AudioCoreSound; }
+	SoundEffect* GetAudioCoreSoundEffect() {return this->AudioCoreSoundEffect; }
 };
