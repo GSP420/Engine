@@ -11,9 +11,9 @@ using namespace std;
 class ICore {
 public:
 	//starts the core interface
-	virtual void Startup() = 0;
+	virtual void Startup(void*) = 0;
 	//updates the core interface
-	virtual void Update() = 0;
+	virtual void Update(void*) = 0;
 	//shutdowns the core interface
-	virtual void Shutdown() = 0;
+	virtual void Shutdown(void*) = 0;
 };
