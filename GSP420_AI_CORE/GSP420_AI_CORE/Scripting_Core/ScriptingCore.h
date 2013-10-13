@@ -1,13 +1,14 @@
 // *******************************
 // Interface Class - ScriptingCore
 // *******************************
-//#include "ICore.h"
+#include "ICore.h"
 #include <string>
 //#include "Script.h"
 #pragma once
 using namespace std;
 
-class ScriptingCore //: public ICore
+
+class ScriptingCore : public ICore
 {
 public:
 	ScriptingCore();

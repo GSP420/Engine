@@ -67,9 +67,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Agent.h" />
     <ClInclude Include="AIInterface.h" />
     <ClInclude Include="AISystem.h" />
+    <ClInclude Include="AI_Core\Agent.h" />
     <ClInclude Include="AudioCore.h" />
     <ClInclude Include="Behavior.h" />
     <ClInclude Include="Camera.h" />
@@ -96,6 +96,14 @@
     <ClInclude Include="PhysicsInterface.h" />
     <ClInclude Include="Pursue.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Scripting_Core\lauxlib.h" />
+    <ClInclude Include="Scripting_Core\lua.h" />
+    <ClInclude Include="Scripting_Core\lua.hpp" />
+    <ClInclude Include="Scripting_Core\luaconf.h" />
+    <ClInclude Include="Scripting_Core\lualib.h" />
+    <ClInclude Include="Scripting_Core\ScriptingCore.h" />
+    <ClInclude Include="Scripting_Core\stdafx.h" />
+    <ClInclude Include="Scripting_Core\targetver.h" />
     <ClInclude Include="settings.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Steering.h" />
@@ -129,6 +137,10 @@
     <ClCompile Include="PhysicsCollision.cpp" />
     <ClCompile Include="PhysicsCore.cpp" />
     <ClCompile Include="Pursue.cpp" />
+    <ClCompile Include="Scripting_Core\Script.cpp" />
+    <ClCompile Include="Scripting_Core\ScriptingCore.cpp" />
+    <ClCompile Include="Scripting_Core\ScriptingMain.cpp" />
+    <ClCompile Include="Scripting_Core\stdafx.cpp" />
     <ClCompile Include="Steering.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="UI.cpp" />
