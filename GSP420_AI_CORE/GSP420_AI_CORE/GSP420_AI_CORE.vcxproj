@@ -44,6 +44,11 @@
     <ClInclude Include="Physics_Core\PhysicsCore.h" />
     <ClInclude Include="Physics_Core\PhysicsInterface.h" />
     <ClInclude Include="Physics_Core\resource.h" />
+    <ClInclude Include="Scripting_Core\lauxlib.h" />
+    <ClInclude Include="Scripting_Core\lua.h" />
+    <ClInclude Include="Scripting_Core\lua.hpp" />
+    <ClInclude Include="Scripting_Core\luaconf.h" />
+    <ClInclude Include="Scripting_Core\lualib.h" />
     <ClInclude Include="Scripting_Core\Script.h" />
     <ClInclude Include="Scripting_Core\ScriptingCore.h" />
     <ClInclude Include="Scripting_Core\stdafx.h" />
@@ -69,7 +74,6 @@
     <ClCompile Include="Graphics_Core\Material.cpp" />
     <ClCompile Include="Graphics_Core\Meshes.cpp" />
     <ClCompile Include="Graphics_Core\Text.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Main_Core\Clock.cpp" />
     <ClCompile Include="Main_Core\Entity.cpp" />
     <ClCompile Include="Main_Core\EntityManager.cpp" />
