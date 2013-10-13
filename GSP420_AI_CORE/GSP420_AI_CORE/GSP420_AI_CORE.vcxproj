@@ -12,12 +12,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AIInterface.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ScriptingCore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIInterface.h" />
     <ClInclude Include="AudioCore.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="PhysicsInterface.h" />
     <ClInclude Include="ScriptingCore.h" />
   </ItemGroup>
