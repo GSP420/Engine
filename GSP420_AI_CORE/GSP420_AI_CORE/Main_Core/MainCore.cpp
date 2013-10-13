@@ -15,6 +15,8 @@ void MainCore::Startup(void)
 	this->clock = new Clock();
 
 	// init cores
+	this->PhysicsManager = GetPhysicsManager();
+	this->PhysicsManager->StartUp(1000);
 }
 
 void MainCore::Update(void)
@@ -32,6 +34,8 @@ void MainCore::Update(void)
 	this->clock->StartRender();
 	// update gfx core
 	this->clock->EndRender();
+
+	this->PhysicsManager->Update(this->clock->GetElapsed());
 }
 
 
@@ -42,4 +46,5 @@ void MainCore::Shutdown(void)
 	delete clock;
 
 	// shutdown cores
+	this->PhysicsManager->Shutdown();
 }
