@@ -4,8 +4,8 @@
 * between 1 and 10 in all directions.
 */
 
-#include "State.h"
-#include "Steering.h"
+#include "AI_Core/State.h"
+#include "AI_Core/Steering.h"
 
 class Wander : public State
 {

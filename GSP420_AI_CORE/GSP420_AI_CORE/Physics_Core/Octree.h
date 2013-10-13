@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include "PhysicsCore.h"
+#include "Physics_Core/PhysicsCore.h"
 #include <set>
 #include <vector>
 

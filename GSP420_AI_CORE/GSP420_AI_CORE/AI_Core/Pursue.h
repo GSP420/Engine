@@ -5,8 +5,8 @@
 *	written by Mark Kirol
 */
 
-#include "State.h"
-#include "Steering.h"
+#include "AI_Core/State.h"
+#include "AI_Core/Steering.h"
 
 class Pursue : public State
 {

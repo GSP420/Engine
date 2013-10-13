@@ -13,7 +13,7 @@
 #include <stddef.h>
 
 
-#include "luaconf.h"
+#include "Scripting_Core/luaconf.h"
 
 
 #define LUA_VERSION	"Lua 5.1"

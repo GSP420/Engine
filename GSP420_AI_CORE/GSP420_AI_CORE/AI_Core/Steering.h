@@ -4,7 +4,7 @@
 #define ToRadian(degree) ((degree) * (PI / 180.0f))
 #define ToDegree(radian) ((radian) * (180.0f / PI))
 
-#include "Agent.h"
+#include "AI_Core/Agent.h"
 
 class Steering
 {

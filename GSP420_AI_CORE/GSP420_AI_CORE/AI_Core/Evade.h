@@ -1,6 +1,6 @@
 #pragma once
-#include "State.h"
-#include "Steering.h"
+#include "AI_Core/State.h"
+#include "AI_Core/Steering.h"
 
 class Evade : public State
 {
