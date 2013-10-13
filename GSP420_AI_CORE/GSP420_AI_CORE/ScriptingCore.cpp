@@ -25,9 +25,3 @@ void ScriptingCore::Shutdown()
 	// Shutdown Core
 	delete script;
 }
-
-
-
-
-
-

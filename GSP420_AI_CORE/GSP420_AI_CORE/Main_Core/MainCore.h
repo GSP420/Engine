@@ -1,10 +1,12 @@
 #pragma once
-#include "ICore.h"
-#include "MessageManager.h"
-#include "EntityManager.h"
-#include "Clock.h"
+#include "Main_Core/ICore.h"
+#include "Main_Core/MessageManager.h"
+#include "Main_Core/EntityManager.h"
+#include "Main_Core/Clock.h"
 #include "AIInterface.h"
 #include "AudioCore.h"
+#include "ScriptingCore.h"
+
 
 
 class MainCore : public ICore
