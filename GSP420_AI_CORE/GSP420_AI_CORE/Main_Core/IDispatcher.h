@@ -1,5 +1,5 @@
 #pragma once
-#include "Message.h"
+#include "Main_Core/Message.h"
 
 class Message;
 

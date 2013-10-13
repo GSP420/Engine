@@ -11,17 +11,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AIInterface.cpp" />
-    <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ScriptingCore.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AIInterface.h" />
-    <ClInclude Include="AudioCore.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="PhysicsInterface.h" />
-    <ClInclude Include="ScriptingCore.h" />
+    <ClInclude Include="Main_Core\Clock.h" />
+    <ClInclude Include="Main_Core\Entity.h" />
+    <ClInclude Include="Main_Core\EntityManager.h" />
+    <ClInclude Include="Main_Core\ICore.h" />
+    <ClInclude Include="Main_Core\IDispatcher.h" />
+    <ClInclude Include="Main_Core\MainCore.h" />
+    <ClInclude Include="Main_Core\Message.h" />
+    <ClInclude Include="Main_Core\MessageManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8C298135-E918-4C6D-8B9F-A54875AD5DDB}</ProjectGuid>
