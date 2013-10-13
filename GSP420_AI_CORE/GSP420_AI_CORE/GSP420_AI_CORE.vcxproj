@@ -10,6 +10,15 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AIInterface.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AIInterface.h" />
+    <ClInclude Include="AudioCore.h" />
+    <ClInclude Include="PhysicsInterface.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8C298135-E918-4C6D-8B9F-A54875AD5DDB}</ProjectGuid>
     <RootNamespace>GSP420_AI_CORE</RootNamespace>

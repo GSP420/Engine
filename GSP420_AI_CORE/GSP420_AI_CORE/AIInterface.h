@@ -1,7 +1,7 @@
 #pragma once
-#include"ICore.h"
-#include"AISystem.h"
-#include"Agent.h"
+#include"Main_Core/ICore.h"
+#include"AI_Core/AISystem.h"
+#include"AI_Core/Agent.h"
 
 
 

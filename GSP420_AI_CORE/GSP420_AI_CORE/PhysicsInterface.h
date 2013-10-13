@@ -44,9 +44,9 @@ Main()
 }
 *******************************************************************************************/
 #pragma once
-#include "PhysicsCore.h"
-#include "PhysicsCollision.h"
-#include "ICore.h"
+#include "Physics_Core/PhysicsCore.h"
+#include "Physics_Core/PhysicsCollision.h"
+#include "Main_Core/ICore.h"
 
 class PhysicsInterface : public ICore
 {
