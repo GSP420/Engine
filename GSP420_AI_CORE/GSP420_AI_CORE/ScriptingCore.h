@@ -3,10 +3,10 @@
 // *******************************
 #include "Main_Core/ICore.h"
 #include <string>
-//#include "Script.h"
+#include "Scripting_Core/Script.h"
 #pragma once
 using namespace std;
-#include"AI_Core/Agent.h"
+
 
 
 class ScriptingCore : public ICore

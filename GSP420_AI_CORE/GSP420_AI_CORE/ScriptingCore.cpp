@@ -1,11 +1,11 @@
 // ScriptingCore.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
+#include "Scripting_Core/stdafx.h"
 #include <iostream>
 using namespace std;
 #include <string>
-#include "Script.h"
+#include "Scripting_Core/Script.h"
 #include "Scriptingcore.h"
 
 void ScriptingCore::Startup()
