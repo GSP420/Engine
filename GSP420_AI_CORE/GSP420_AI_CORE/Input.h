@@ -13,20 +13,27 @@
 
 #include <dinput.h>
 #include<d3d9.h>
+#include"ICore.h"
 
-class Input
+class Input : public ICore
 {
 public:
 							Input(void);
 							~Input(void);
+
+
+						//updates device status
+	void					Update(void);
+	void					Startup();
+	void					ShutDown();
+
 
 							//initializations
 	bool					InitDirectInput(void);
 	bool					InitKeyboard(void);
 	bool					InitMouse(void);
 
-							//updates device status
-	bool					Update(void);
+
 
 							//Keystroke Checks
 	bool					WPressed();

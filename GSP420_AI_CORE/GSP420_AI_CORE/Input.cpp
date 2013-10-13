@@ -106,13 +106,35 @@ SetAttributes(false,1.0f);
 
 return true;
 }//InitMouse
+Input::~Input(void)
+{
+if(m_pDIKeyboardDevice != NULL)
+ {
+ m_pDIKeyboardDevice->Unacquire();
+ m_pDIKeyboardDevice->Release();
+ m_pDIKeyboardDevice = NULL;
+ }
 
-bool Input::Update(void)
+if(m_pDIObject != NULL)
+ {
+ m_pDIObject->Release();
+ m_pDIObject = NULL;
+
+ if(m_pDIMouseDevice != NULL)
+ {
+ m_pDIMouseDevice->Unacquire();
+ m_pDIMouseDevice->Release();
+ m_pDIMouseDevice = NULL;
+ }
+ }
+}//~Input
+
+void Input::Update(void)
 {
 if(FAILED(m_pDIKeyboardDevice->GetDeviceState(sizeof(KeyBuffer),(LPVOID)&KeyBuffer)))
  {
  MessageBox(NULL,"GetDeviceState() failed!","Update()",MB_OK);
- return false;
+
  }
 
 if(DIERR_INPUTLOST == m_pDIMouseDevice->GetDeviceState(sizeof(m_MouseState),(LPVOID)&m_MouseState))
@@ -120,8 +142,18 @@ if(DIERR_INPUTLOST == m_pDIMouseDevice->GetDeviceState(sizeof(m_MouseState),(LPV
  m_pDIMouseDevice->Acquire();
 }
 
-return true;
+
 }//Update
+void Input::Startup()
+{
+	Input.Input();
+
+}
+void Input::ShutDown()
+{
+	Input.~Input();
+
+}
 
 #pragma region KeyInput
 
@@ -306,25 +338,4 @@ bool Input::RBUTTONHeld()
 #pragma endregion MouseInput
 
 
-Input::~Input(void)
-{
-if(m_pDIKeyboardDevice != NULL)
- {
- m_pDIKeyboardDevice->Unacquire();
- m_pDIKeyboardDevice->Release();
- m_pDIKeyboardDevice = NULL;
- }
 
-if(m_pDIObject != NULL)
- {
- m_pDIObject->Release();
- m_pDIObject = NULL;
-
- if(m_pDIMouseDevice != NULL)
- {
- m_pDIMouseDevice->Unacquire();
- m_pDIMouseDevice->Release();
- m_pDIMouseDevice = NULL;
- }
- }
-}//~Input
