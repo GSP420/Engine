@@ -11,9 +11,26 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="AI_Core\Agent.h" />
+    <ClInclude Include="AI_Core\AIInterface.h" />
+    <ClInclude Include="AI_Core\AISystem.h" />
+    <ClInclude Include="AI_Core\Behavior.h" />
+    <ClInclude Include="AI_Core\Evade.h" />
+    <ClInclude Include="AI_Core\GenericEnemy.h" />
+    <ClInclude Include="AI_Core\Pursue.h" />
+    <ClInclude Include="AI_Core\State.h" />
+    <ClInclude Include="AI_Core\Steering.h" />
+    <ClInclude Include="AI_Core\Wander.h" />
+    <ClInclude Include="Audio_Core\AudioCore.h" />
+    <ClInclude Include="Graphics_Core\Camera.h" />
+    <ClInclude Include="Graphics_Core\CoreManager.h" />
+    <ClInclude Include="Graphics_Core\DXManager.h" />
+    <ClInclude Include="Graphics_Core\Graphics.h" />
+    <ClInclude Include="Graphics_Core\LightClass.h" />
+    <ClInclude Include="Graphics_Core\Material.h" />
+    <ClInclude Include="Graphics_Core\Meshes.h" />
+    <ClInclude Include="Graphics_Core\settings.h" />
+    <ClInclude Include="Graphics_Core\Text.h" />
     <ClInclude Include="Main_Core\Clock.h" />
     <ClInclude Include="Main_Core\Entity.h" />
     <ClInclude Include="Main_Core\EntityManager.h" />
@@ -22,6 +39,53 @@
     <ClInclude Include="Main_Core\MainCore.h" />
     <ClInclude Include="Main_Core\Message.h" />
     <ClInclude Include="Main_Core\MessageManager.h" />
+    <ClInclude Include="Physics_Core\Octree.h" />
+    <ClInclude Include="Physics_Core\PhysicsCollision.h" />
+    <ClInclude Include="Physics_Core\PhysicsCore.h" />
+    <ClInclude Include="Physics_Core\PhysicsInterface.h" />
+    <ClInclude Include="Physics_Core\resource.h" />
+    <ClInclude Include="Scripting_Core\Script.h" />
+    <ClInclude Include="Scripting_Core\ScriptingCore.h" />
+    <ClInclude Include="Scripting_Core\stdafx.h" />
+    <ClInclude Include="Scripting_Core\targetver.h" />
+    <ClInclude Include="UI_Core\Input.h" />
+    <ClInclude Include="UI_Core\UI.h" />
+    <ClInclude Include="UI_Core\UIElement.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AI_Core\Agent.cpp" />
+    <ClCompile Include="AI_Core\AIInterface.cpp" />
+    <ClCompile Include="AI_Core\Evade.cpp" />
+    <ClCompile Include="AI_Core\GenericEnemy.cpp" />
+    <ClCompile Include="AI_Core\Pursue.cpp" />
+    <ClCompile Include="AI_Core\Steering.cpp" />
+    <ClCompile Include="AI_Core\Wander.cpp" />
+    <ClCompile Include="Audio_Core\AudioCore.cpp" />
+    <ClCompile Include="Graphics_Core\Camera.cpp" />
+    <ClCompile Include="Graphics_Core\CoreManager.cpp" />
+    <ClCompile Include="Graphics_Core\DXManager.cpp" />
+    <ClCompile Include="Graphics_Core\Graphics.cpp" />
+    <ClCompile Include="Graphics_Core\LightClass.cpp" />
+    <ClCompile Include="Graphics_Core\Material.cpp" />
+    <ClCompile Include="Graphics_Core\Meshes.cpp" />
+    <ClCompile Include="Graphics_Core\Text.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Main_Core\Clock.cpp" />
+    <ClCompile Include="Main_Core\Entity.cpp" />
+    <ClCompile Include="Main_Core\EntityManager.cpp" />
+    <ClCompile Include="Main_Core\MainCore.cpp" />
+    <ClCompile Include="Main_Core\Message.cpp" />
+    <ClCompile Include="Main_Core\MessageManager.cpp" />
+    <ClCompile Include="Physics_Core\Octree.cpp" />
+    <ClCompile Include="Physics_Core\PhysicsCollision.cpp" />
+    <ClCompile Include="Physics_Core\PhysicsCore.cpp" />
+    <ClCompile Include="Scripting_Core\Script.cpp" />
+    <ClCompile Include="Scripting_Core\ScriptingCore.cpp" />
+    <ClCompile Include="Scripting_Core\ScriptingMain.cpp" />
+    <ClCompile Include="Scripting_Core\stdafx.cpp" />
+    <ClCompile Include="UI_Core\Input.cpp" />
+    <ClCompile Include="UI_Core\UI.cpp" />
+    <ClCompile Include="UI_Core\UIElement.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8C298135-E918-4C6D-8B9F-A54875AD5DDB}</ProjectGuid>

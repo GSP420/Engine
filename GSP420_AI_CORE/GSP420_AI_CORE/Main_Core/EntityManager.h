@@ -1,7 +1,7 @@
 #pragma once
 #include <map>
 #include <stack>
-#include "Main_Core/Entity.h"
+#include "Entity.h"
 
 class EntityManager
 {

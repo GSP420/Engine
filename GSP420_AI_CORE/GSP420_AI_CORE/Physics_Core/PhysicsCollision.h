@@ -1,6 +1,6 @@
 #pragma once
-#include "Physics_Core/PhysicsCore.h"
-#include "Physics_Core/Octree.h"
+#include "PhysicsCore.h"
+#include "Octree.h"
 
 class PhysicsCollision
 {

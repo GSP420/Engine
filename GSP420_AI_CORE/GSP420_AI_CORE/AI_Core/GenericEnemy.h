@@ -5,10 +5,10 @@
 * this behavior, which is just a "Generic Enemy" that wanders.
 */
 
-#include "AI_Core/Behavior.h"
-#include "AI_Core/Wander.h"
-#include "AI_Core/Evade.h"
-#include "AI_Core/Pursue.h"
+#include "Behavior.h"
+#include "Wander.h"
+#include "Evade.h"
+#include "Pursue.h"
 #include <stdlib.h> 
 
 class GenericEnemy : public Behavior

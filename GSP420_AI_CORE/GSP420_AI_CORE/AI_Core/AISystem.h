@@ -12,7 +12,7 @@
 #include <hash_map>
 #include <time.h>
 
-#include "AI_Core/GenericEnemy.h"
+#include "GenericEnemy.h"
 
 using namespace std;
 using namespace stdext;

@@ -6,7 +6,7 @@
 
 #include <iostream>
 #include <string>
-#include "Scripting_Core/lua.hpp"
+#include "lua.hpp"
 #pragma comment(lib, "lua5.1.lib")
 
 class Script 

@@ -1,5 +1,5 @@
 #pragma once
-#include "Main_Core/Message.h"
+#include "Message.h"
 
 // handles sending messages to intended recipients
 class MessageManager

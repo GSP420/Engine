@@ -1,9 +1,9 @@
 // *******************************
 // Interface Class - ScriptingCore
 // *******************************
-#include "Main_Core/ICore.h"
+#include "../Main_Core/ICore.h"
 #include <string>
-#include "Scripting_Core/Script.h"
+#include "Script.h"
 #pragma once
 using namespace std;
 
