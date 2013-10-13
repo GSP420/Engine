@@ -146,12 +146,12 @@ if(DIERR_INPUTLOST == m_pDIMouseDevice->GetDeviceState(sizeof(m_MouseState),(LPV
 }//Update
 void Input::Startup()
 {
-	Input.Input();
+	Input();
 
 }
 void Input::ShutDown()
 {
-	Input.~Input();
+	~Input();
 
 }
 
