@@ -48,13 +48,22 @@ Main()
 #include "PhysicsCollision.h"
 #include "../Main_Core/ICore.h"
 
+struct PhysicsFloats
+{
+	float SCENE_SIZE;
+	float dt;
+};
+
 class PhysicsInterface : public ICore
 {
 public:
 
-	void StartUp(int SCENE_SIZE);
-	void Update(float deltaTime);
-	void Shutdown();
+	void Startup(void*);
+	void Update(void*);
+	void Shutdown(void*);
+
+	PhysicsInterface();
+	~PhysicsInterface();
 
 	bool RayCast3D(D3DXVECTOR3 startPoint, D3DXVECTOR3 directionVector, list<AABB> collidables, int maxTestLimit, RayCastContact &contactOutput);
 	bool RayCast2D(D3DXVECTOR2 startPoint, D3DXVECTOR2 directionVector, list<AABB> collidables, int maxTestLimit, RayCastContact &contactOutput);
@@ -73,22 +82,30 @@ private:
 	float timeUntilUpdate;
 };
 
-void PhysicsInterface::StartUp(int SCENE_SIZE)
+PhysicsInterface::PhysicsInterface(){
+}
+
+PhysicsInterface::~PhysicsInterface(){
+}
+
+void PhysicsInterface::Startup(void* SceneSize)
 {
+	PhysicsFloats* size = (PhysicsFloats *) SceneSize; 
 	core.velocity = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	core.acceleration = D3DXVECTOR3(0.0f, float(core.GRAVITY), 0.0f);
 	timeUntilUpdate = 0.0f;
 
-	collide._octree = new Octree(D3DXVECTOR3(-SCENE_SIZE / 2, -SCENE_SIZE / 2, -SCENE_SIZE / 2),
-						D3DXVECTOR3(SCENE_SIZE / 2, SCENE_SIZE / 2, SCENE_SIZE / 2),
-						0.0f);
+	collide._octree = new Octree(D3DXVECTOR3(-size->SCENE_SIZE / 2, -size->SCENE_SIZE / 2, size->SCENE_SIZE / 2),
+						D3DXVECTOR3(size->SCENE_SIZE / 2, size->SCENE_SIZE / 2, size->SCENE_SIZE / 2),
+						1.0f);
 }
 
-void PhysicsInterface::Update(float dt)
+void PhysicsInterface::Update(void* deltaTime)
 {
+	PhysicsFloats* time = (PhysicsFloats *)deltaTime;
 	float TOI;
-	core.Accelerate(dt);
-	collide._octree->advance(core.boxes, collide._octree, dt, timeUntilUpdate);
+	core.Accelerate(time->dt);
+	collide._octree->advance(core.boxes, collide._octree, time->dt, timeUntilUpdate);
 
 	//Loop through the boxes for broad phase
 	for(int i = 0; i < core.boxes.size(); i++)
@@ -126,7 +143,7 @@ void PhysicsInterface::Update(float dt)
 	//by the designer to resolve the collisions.
 }
 
-void PhysicsInterface::Shutdown()
+void PhysicsInterface::Shutdown(void*)
 {
 	for(unsigned int i = 0; i < core.boxes.size(); i++)
 		delete core.boxes[i];
