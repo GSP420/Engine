@@ -5,10 +5,11 @@
 #include <string>
 #include "UIElement.h"
 #include <D3dx9math.h>
+#include"../Main_Core/ICore.h"
 
 using namespace std;
 
-class UI
+class UI  : public ICore
 {
 public:
 	UI(void);
