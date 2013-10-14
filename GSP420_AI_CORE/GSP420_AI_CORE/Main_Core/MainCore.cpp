@@ -19,7 +19,11 @@ void MainCore::Startup(void)
 	this->PhysicsManager->Startup((float*)1000);
 
 	this->AudioCoreSound = GetAudioCoreSound();
-	this->AudioCoreSound->Starup();
+	this->AudioCoreSound->Startup();
+
+	this->InputManager = GetInputManager();
+	this->InputManager->Startup();
+
 }
 
 void MainCore::Update(void)
@@ -42,6 +46,8 @@ void MainCore::Update(void)
 	this->PhysicsManager->Update(this->clock->GetElapsed());
 
 	this->AudioCoreSound->Update();
+
+	this->InputManager->Update();
 }
 
 
@@ -55,4 +61,6 @@ void MainCore::Shutdown(void)
 	this->PhysicsManager->Shutdown(new void*);
 
 	this->AudioCoreSound->Shutdown();
+
+	this->InputManager->ShutDown();
 }
