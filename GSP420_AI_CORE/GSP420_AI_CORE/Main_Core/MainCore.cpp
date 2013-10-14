@@ -36,14 +36,13 @@ void MainCore::Update(void)
 
 	this->clock->StartUpdate();
 	// update cores
-	this->PhysicsManager->Update((float*)this->clock->GetElapsed());
+	float dt = this->clock->GetElapsed();
+	this->PhysicsManager->Update(&dt);
 	this->clock->EndUpdate();
 
 	this->clock->StartRender();
 	// update gfx core
 	this->clock->EndRender();
-
-	this->PhysicsManager->Update(this->clock->GetElapsed());
 
 	this->AudioCoreSound->Update();
 
