@@ -48,6 +48,8 @@ void MainCore::Update(void)
 	this->AudioCoreSound->Update();
 
 	this->InputManager->Update();
+
+	//this->UIManager->Update(// GAMESTATE (ENUM or INT);
 }
 
 
