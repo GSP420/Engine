@@ -8,7 +8,7 @@
 #include "../Scripting_Core/ScriptingCore.h"
 #include "../Physics_Core/PhysicsInterface.h"
 #include "../UI_Core/Input.h"
-
+#include "../UI_Core/UI.h"
 
 
 class MainCore : public ICore
@@ -22,6 +22,7 @@ private:
 	SoundEffect* AudioCoreSoundEffect;
 	PhysicsInterface* PhysicsManager;
 	Input* InputManager;
+	UI*    UIManager;
 
 public:
 
@@ -40,4 +41,5 @@ public:
 	SoundEffect* GetAudioCoreSoundEffect() {return this->AudioCoreSoundEffect; }
 	PhysicsInterface* GetPhysicsManager() {return this->PhysicsManager;}
 	Input* GetInputManager() {return this->InputManager;}
+	UI* GetUIManager() {return this->UIManager;}
 };
