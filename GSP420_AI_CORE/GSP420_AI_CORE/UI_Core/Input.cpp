@@ -7,16 +7,7 @@
 
 Input::Input(void)
 {
-	m_pDIObject = NULL;
-	m_pDIKeyboardDevice = NULL;
-	m_pDIMouseDevice = NULL;
 	
-	//Clears the buffer before use
-	ZeroMemory(&KeyBuffer, 256);
-
-	if(!InitDirectInput()) MessageBox (NULL, "InitDirectInput Failed", "ERROR", MB_OK);
-	else if(!InitKeyboard()) MessageBox (NULL, "InitKeyboard Failed", "ERROR", MB_OK);
-	else if(!InitMouse()) MessageBox (NULL, "InitMouse Failed", "Error", MB_OK);
 }//Input
 
 
@@ -108,25 +99,7 @@ return true;
 }//InitMouse
 Input::~Input(void)
 {
-if(m_pDIKeyboardDevice != NULL)
- {
- m_pDIKeyboardDevice->Unacquire();
- m_pDIKeyboardDevice->Release();
- m_pDIKeyboardDevice = NULL;
- }
 
-if(m_pDIObject != NULL)
- {
- m_pDIObject->Release();
- m_pDIObject = NULL;
-
- if(m_pDIMouseDevice != NULL)
- {
- m_pDIMouseDevice->Unacquire();
- m_pDIMouseDevice->Release();
- m_pDIMouseDevice = NULL;
- }
- }
 }//~Input
 
 void Input::Update(void)
@@ -146,13 +119,40 @@ if(DIERR_INPUTLOST == m_pDIMouseDevice->GetDeviceState(sizeof(m_MouseState),(LPV
 }//Update
 void Input::Startup()
 {
-	Input();
+	m_pDIObject = NULL;
+	m_pDIKeyboardDevice = NULL;
+	m_pDIMouseDevice = NULL;
+	
+	//Clears the buffer before use
+	ZeroMemory(&KeyBuffer, 256);
+
+	if(!InitDirectInput()) MessageBox (NULL, "InitDirectInput Failed", "ERROR", MB_OK);
+	else if(!InitKeyboard()) MessageBox (NULL, "InitKeyboard Failed", "ERROR", MB_OK);
+	else if(!InitMouse()) MessageBox (NULL, "InitMouse Failed", "Error", MB_OK);
 
 }
 void Input::ShutDown()
 {
-	~Input();
+	
+	if(m_pDIKeyboardDevice != NULL)
+ {
+ m_pDIKeyboardDevice->Unacquire();
+ m_pDIKeyboardDevice->Release();
+ m_pDIKeyboardDevice = NULL;
+ }
 
+if(m_pDIObject != NULL)
+ {
+ m_pDIObject->Release();
+ m_pDIObject = NULL;
+
+ if(m_pDIMouseDevice != NULL)
+ {
+ m_pDIMouseDevice->Unacquire();
+ m_pDIMouseDevice->Release();
+ m_pDIMouseDevice = NULL;
+ }
+ }
 }
 
 #pragma region KeyInput

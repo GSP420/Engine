@@ -7,6 +7,7 @@
 #include "../Audio_Core/AudioCore.h"
 #include "../Scripting_Core/ScriptingCore.h"
 #include "../Physics_Core/PhysicsInterface.h"
+#include "../UI_Core/Input.h"
 
 
 
@@ -20,6 +21,7 @@ private:
 	Sound* AudioCoreSound;
 	SoundEffect* AudioCoreSoundEffect;
 	PhysicsInterface* PhysicsManager;
+	Input* InputManager;
 
 public:
 
@@ -37,4 +39,5 @@ public:
 	Sound* GetAudioCoreSound() {return this->AudioCoreSound; }
 	SoundEffect* GetAudioCoreSoundEffect() {return this->AudioCoreSoundEffect; }
 	PhysicsInterface* GetPhysicsManager() {return this->PhysicsManager;}
+	Input* GetInputManager() {return this->InputManager;}
 };
