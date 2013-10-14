@@ -27,6 +27,7 @@ void MainCore::Startup(void)
 	this->ScriptManager = GetScriptManager();
 	this->ScriptManager->Startup();
 
+	this->GraphicsManager->Startup();
 
 }
 
@@ -72,4 +73,6 @@ void MainCore::Shutdown(void)
 	this->InputManager->ShutDown();
 
 	this->ScriptManager->Shutdown();
+
+	this->GraphicsManager->Shutdown();
 }

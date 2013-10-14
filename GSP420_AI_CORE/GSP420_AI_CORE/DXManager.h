@@ -27,6 +27,7 @@ public:
 	void EndScene();
 	void Present();
 	void Shutdown();
+	void Startup();
 
 	// Returns a pointer to the Direct3D Device
 	LPDIRECT3DDEVICE9 GetDevice() const {return pD3DDevice;}

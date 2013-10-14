@@ -9,6 +9,7 @@
 #include "PhysicsInterface.h"
 #include "Input.h"
 #include "UI.h"
+#include "DXManager.h"
 
 
 class MainCore : public ICore
@@ -24,6 +25,7 @@ private:
 	Input* InputManager;
 	UI*    UIManager;
 	ScriptingCore* ScriptManager;
+	DXManager*		GraphicsManager;
 
 public:
 
@@ -44,4 +46,5 @@ public:
 	Input* GetInputManager() {return this->InputManager;}
 	UI* GetUIManager() {return this->UIManager;}
 	ScriptingCore* GetScriptManager() {return this->ScriptManager;}
+	DXManager* GetGraphicsManager() {return this->GraphicsManager;}
 };
