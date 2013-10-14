@@ -13,7 +13,7 @@
 
 #include <dinput.h>
 #include<d3d9.h>
-#include"../Main_Core/ICore.h"
+#include"ICore.h"
 
 class Input : public ICore
 {

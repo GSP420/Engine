@@ -24,6 +24,10 @@ void MainCore::Startup(void)
 	this->InputManager = GetInputManager();
 	this->InputManager->Startup();
 
+	this->ScriptManager = GetScriptManager();
+	this->ScriptManager->Startup();
+
+
 }
 
 void MainCore::Update(void)
@@ -38,6 +42,8 @@ void MainCore::Update(void)
 	// update cores
 	float dt = this->clock->GetElapsed();
 	this->PhysicsManager->Update(&dt);
+	this->AIManager->Update();
+	this->ScriptManager->Update();
 	this->clock->EndUpdate();
 
 	this->clock->StartRender();
@@ -64,4 +70,6 @@ void MainCore::Shutdown(void)
 	this->AudioCoreSound->Shutdown();
 
 	this->InputManager->ShutDown();
+
+	this->ScriptManager->Shutdown();
 }

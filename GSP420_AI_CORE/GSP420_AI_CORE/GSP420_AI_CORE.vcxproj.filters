@@ -15,243 +15,240 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AI_Core\Agent.h">
+    <ClInclude Include="Agent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Core\AIInterface.h">
+    <ClInclude Include="AIInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Core\AISystem.h">
+    <ClInclude Include="AISystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Core\Behavior.h">
+    <ClInclude Include="AudioCore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Core\Evade.h">
+    <ClInclude Include="Behavior.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Core\GenericEnemy.h">
+    <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Core\Pursue.h">
+    <ClInclude Include="Clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Core\State.h">
+    <ClInclude Include="CoreManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Core\Steering.h">
+    <ClInclude Include="DXManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Core\Wander.h">
+    <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Audio_Core\AudioCore.h">
+    <ClInclude Include="EntityManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Core\Camera.h">
+    <ClInclude Include="Evade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Core\CoreManager.h">
+    <ClInclude Include="GenericEnemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Core\DXManager.h">
+    <ClInclude Include="Graphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Core\Graphics.h">
+    <ClInclude Include="ICore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Core\LightClass.h">
+    <ClInclude Include="IDispatcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Core\Material.h">
+    <ClInclude Include="Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Core\Meshes.h">
+    <ClInclude Include="lauxlib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Core\settings.h">
+    <ClInclude Include="LightClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Core\Text.h">
+    <ClInclude Include="lua.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Main_Core\Clock.h">
+    <ClInclude Include="lua.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Main_Core\Entity.h">
+    <ClInclude Include="luaconf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Main_Core\EntityManager.h">
+    <ClInclude Include="lualib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Main_Core\ICore.h">
+    <ClInclude Include="MainCore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Main_Core\IDispatcher.h">
+    <ClInclude Include="Material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Main_Core\MainCore.h">
+    <ClInclude Include="Meshes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Main_Core\Message.h">
+    <ClInclude Include="Message.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Main_Core\MessageManager.h">
+    <ClInclude Include="MessageManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Physics_Core\Octree.h">
+    <ClInclude Include="Octree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Physics_Core\PhysicsCollision.h">
+    <ClInclude Include="PhysicsCollision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Physics_Core\PhysicsCore.h">
+    <ClInclude Include="PhysicsCore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Physics_Core\PhysicsInterface.h">
+    <ClInclude Include="PhysicsInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Physics_Core\resource.h">
+    <ClInclude Include="Pursue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scripting_Core\lauxlib.h">
+    <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scripting_Core\lua.h">
+    <ClInclude Include="Script.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scripting_Core\lua.hpp">
+    <ClInclude Include="ScriptingCore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scripting_Core\luaconf.h">
+    <ClInclude Include="settings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scripting_Core\lualib.h">
+    <ClInclude Include="State.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scripting_Core\Script.h">
+    <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scripting_Core\ScriptingCore.h">
+    <ClInclude Include="Steering.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scripting_Core\stdafx.h">
+    <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scripting_Core\targetver.h">
+    <ClInclude Include="Text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UI_Core\Input.h">
+    <ClInclude Include="UI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UI_Core\UI.h">
+    <ClInclude Include="UIElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UI_Core\UIElement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Core\InputInterface.h">
+    <ClInclude Include="Wander.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AI_Core\Agent.cpp">
+    <ClCompile Include="Agent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AI_Core\AIInterface.cpp">
+    <ClCompile Include="AIInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AI_Core\Evade.cpp">
+    <ClCompile Include="AudioCore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AI_Core\GenericEnemy.cpp">
+    <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AI_Core\Pursue.cpp">
+    <ClCompile Include="Clock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AI_Core\Steering.cpp">
+    <ClCompile Include="CoreManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AI_Core\Wander.cpp">
+    <ClCompile Include="DXManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Audio_Core\AudioCore.cpp">
+    <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics_Core\Camera.cpp">
+    <ClCompile Include="EntityManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics_Core\CoreManager.cpp">
+    <ClCompile Include="Evade.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics_Core\DXManager.cpp">
+    <ClCompile Include="GenericEnemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics_Core\Graphics.cpp">
+    <ClCompile Include="Graphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics_Core\LightClass.cpp">
+    <ClCompile Include="Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics_Core\Material.cpp">
+    <ClCompile Include="LightClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics_Core\Meshes.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics_Core\Text.cpp">
+    <ClCompile Include="MainCore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main_Core\Clock.cpp">
+    <ClCompile Include="Material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main_Core\Entity.cpp">
+    <ClCompile Include="Meshes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main_Core\EntityManager.cpp">
+    <ClCompile Include="Message.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main_Core\MainCore.cpp">
+    <ClCompile Include="MessageManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main_Core\Message.cpp">
+    <ClCompile Include="Octree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main_Core\MessageManager.cpp">
+    <ClCompile Include="PhysicsCollision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Physics_Core\Octree.cpp">
+    <ClCompile Include="PhysicsCore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Physics_Core\PhysicsCollision.cpp">
+    <ClCompile Include="Pursue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Physics_Core\PhysicsCore.cpp">
+    <ClCompile Include="Script.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Scripting_Core\Script.cpp">
+    <ClCompile Include="ScriptingCore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Scripting_Core\ScriptingCore.cpp">
+    <ClCompile Include="ScriptingMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Scripting_Core\ScriptingMain.cpp">
+    <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Scripting_Core\stdafx.cpp">
+    <ClCompile Include="Steering.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UI_Core\Input.cpp">
+    <ClCompile Include="Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UI_Core\UI.cpp">
+    <ClCompile Include="UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UI_Core\UIElement.cpp">
+    <ClCompile Include="UIElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UI_Core\InputInterface.cpp">
+    <ClCompile Include="Wander.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

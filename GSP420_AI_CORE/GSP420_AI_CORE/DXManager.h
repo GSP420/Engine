@@ -8,8 +8,9 @@
 #pragma once
 
 #include "Graphics.h"
+#include"ICore.h"
 
-class DXManager
+class DXManager : public ICore
 {
 private:
 	IDirect3D9* pD3DObject;

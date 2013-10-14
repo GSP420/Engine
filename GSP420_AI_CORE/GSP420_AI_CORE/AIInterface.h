@@ -1,5 +1,5 @@
 #pragma once
-#include"../Main_Core/ICore.h"
+#include"ICore.h"
 #include"AISystem.h"
 #include"Agent.h"
 
@@ -16,4 +16,3 @@ public:
 private:
 	static AISystem*	AI;
 };
-

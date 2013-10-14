@@ -10,7 +10,7 @@
 #include "fmod.h"
 #include "assert.h"
 #include "fmod_errors.h"
-#include "../Main_Core/ICore.h"
+#include "ICore.h"
 using namespace std;
 
 class Sound : public ICore

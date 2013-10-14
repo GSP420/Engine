@@ -3,7 +3,7 @@
 #pragma once
 // #include "*header*.h"   include header for rendering class
 #include <string>
-#include"../AI_Core/Agent.h"
+#include"Agent.h"
 
 class Entity
 {

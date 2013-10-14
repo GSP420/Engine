@@ -46,7 +46,7 @@ Main()
 #pragma once
 #include "PhysicsCore.h"
 #include "PhysicsCollision.h"
-#include "../Main_Core/ICore.h"
+#include "ICore.h"
 
 struct PhysicsFloats
 {

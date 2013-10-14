@@ -3,12 +3,12 @@
 #include "MessageManager.h"
 #include "EntityManager.h"
 #include "Clock.h"
-#include "../AI_Core/AIInterface.h"
-#include "../Audio_Core/AudioCore.h"
-#include "../Scripting_Core/ScriptingCore.h"
-#include "../Physics_Core/PhysicsInterface.h"
-#include "../UI_Core/Input.h"
-#include "../UI_Core/UI.h"
+#include "AIInterface.h"
+#include "AudioCore.h"
+#include "ScriptingCore.h"
+#include "PhysicsInterface.h"
+#include "Input.h"
+#include "UI.h"
 
 
 class MainCore : public ICore
@@ -23,6 +23,7 @@ private:
 	PhysicsInterface* PhysicsManager;
 	Input* InputManager;
 	UI*    UIManager;
+	ScriptingCore* ScriptManager;
 
 public:
 
@@ -42,4 +43,5 @@ public:
 	PhysicsInterface* GetPhysicsManager() {return this->PhysicsManager;}
 	Input* GetInputManager() {return this->InputManager;}
 	UI* GetUIManager() {return this->UIManager;}
+	ScriptingCore* GetScriptManager() {return this->ScriptManager;}
 };

@@ -1,7 +1,7 @@
 // *******************************
 // Interface Class - ScriptingCore
 // *******************************
-#include "../Main_Core/ICore.h"
+#include "ICore.h"
 #include <string>
 #include "Script.h"
 #pragma once
