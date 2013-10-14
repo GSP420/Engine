@@ -17,6 +17,9 @@ void MainCore::Startup(void)
 	// init cores
 	this->PhysicsManager = GetPhysicsManager();
 	this->PhysicsManager->StartUp(1000);
+
+	this->AudioCoreSound = GetAudioCoreSound();
+	this->AudioCoreSound->Starup();
 }
 
 void MainCore::Update(void)
@@ -36,6 +39,8 @@ void MainCore::Update(void)
 	this->clock->EndRender();
 
 	this->PhysicsManager->Update(this->clock->GetElapsed());
+
+	this->AudioCoreSound->Update();
 }
 
 
@@ -47,4 +52,6 @@ void MainCore::Shutdown(void)
 
 	// shutdown cores
 	this->PhysicsManager->Shutdown();
+
+	this->AudioCoreSound->Shutdown();
 }
