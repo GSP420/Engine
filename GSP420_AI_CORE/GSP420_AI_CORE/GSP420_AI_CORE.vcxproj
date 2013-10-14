@@ -54,6 +54,7 @@
     <ClInclude Include="Scripting_Core\stdafx.h" />
     <ClInclude Include="Scripting_Core\targetver.h" />
     <ClInclude Include="UI_Core\Input.h" />
+    <ClInclude Include="UI_Core\InputInterface.h" />
     <ClInclude Include="UI_Core\UI.h" />
     <ClInclude Include="UI_Core\UIElement.h" />
   </ItemGroup>
@@ -88,6 +89,7 @@
     <ClCompile Include="Scripting_Core\ScriptingMain.cpp" />
     <ClCompile Include="Scripting_Core\stdafx.cpp" />
     <ClCompile Include="UI_Core\Input.cpp" />
+    <ClCompile Include="UI_Core\InputInterface.cpp" />
     <ClCompile Include="UI_Core\UI.cpp" />
     <ClCompile Include="UI_Core\UIElement.cpp" />
   </ItemGroup>

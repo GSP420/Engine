@@ -150,6 +150,9 @@
     <ClInclude Include="UI_Core\UIElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UI_Core\InputInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AI_Core\Agent.cpp">
@@ -246,6 +249,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UI_Core\UIElement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Core\InputInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
