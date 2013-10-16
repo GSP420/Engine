@@ -18,7 +18,7 @@ public:
 	int maxElements;
 	void switchActive();
 	void update(int i);
-	void draw();
+
 	operator FLOAT* ();
 
 	// 2d overload functions
@@ -33,10 +33,11 @@ public:
 	// text overload function
 	void changeElement(int element, std::string textLocation, char text);
 	void changeElement(int element, std::string fLocation, int size, float r, float g, float b); 
+		UIElement element[10]; 
 	int integer;
 private:
 	
-	UIElement element[10]; 
+
 };
 
 
