@@ -13,9 +13,9 @@
 
 #include <dinput.h>
 #include<d3d9.h>
-#include"ICore.h"
+#pragma comment(lib, "dinput8.lib")
 
-class Input : public ICore
+class Input
 {
 public:
 							Input(void);

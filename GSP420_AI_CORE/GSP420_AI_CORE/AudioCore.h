@@ -10,10 +10,10 @@
 #include "fmod.h"
 #include "assert.h"
 #include "fmod_errors.h"
-#include "ICore.h"
+#pragma comment(lib, "fmodex_vc.lib")
 using namespace std;
 
-class Sound : public ICore
+class Sound
 {
 private:
 	static bool s_enabled;						//is the sound enabled?

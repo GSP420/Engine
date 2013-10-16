@@ -5,7 +5,7 @@
 #include <string>
 #include "UIElement.h"
 #include <D3dx9math.h>
-#include"ICore.h"
+
 
 using namespace std;
 

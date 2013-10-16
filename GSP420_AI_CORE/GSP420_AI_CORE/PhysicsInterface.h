@@ -46,21 +46,20 @@ Main()
 #pragma once
 #include "PhysicsCore.h"
 #include "PhysicsCollision.h"
-//#include "ICore.h"
+
 
 struct PhysicsFloats
 {
 	float SCENE_SIZE;
-	float dt;
 };
 
-class PhysicsInterface //: public ICore
+class PhysicsInterface
 {
 public:
 
-	void Startup(void*);
-	void Update(void*);
-	void Shutdown(void*);
+	void Startup(float SceneSize);
+	void Update(float dt);
+	void Shutdown();
 
 	PhysicsInterface();
 	~PhysicsInterface();
@@ -88,24 +87,22 @@ PhysicsInterface::PhysicsInterface(){
 PhysicsInterface::~PhysicsInterface(){
 }
 
-void PhysicsInterface::Startup(void* SceneSize)
+void PhysicsInterface::Startup(float SceneSize)
 {
-	PhysicsFloats* size = (PhysicsFloats *) SceneSize; 
 	core.velocity = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	core.acceleration = D3DXVECTOR3(0.0f, float(core.GRAVITY), 0.0f);
 	timeUntilUpdate = 0.0f;
 
-	collide._octree = new Octree(D3DXVECTOR3(-size->SCENE_SIZE / 2, -size->SCENE_SIZE / 2, size->SCENE_SIZE / 2),
-						D3DXVECTOR3(size->SCENE_SIZE / 2, size->SCENE_SIZE / 2, size->SCENE_SIZE / 2),
+	collide._octree = new Octree(D3DXVECTOR3(-SceneSize / 2, -SceneSize / 2, SceneSize / 2),
+						D3DXVECTOR3(SceneSize / 2, SceneSize / 2, SceneSize / 2),
 						1.0f);
 }
 
-void PhysicsInterface::Update(void* deltaTime)
+void PhysicsInterface::Update(float dt)
 {
-	PhysicsFloats* time = (PhysicsFloats *)deltaTime;
 	float TOI;
-	core.Accelerate(time->dt);
-	collide._octree->advance(core.boxes, collide._octree, time->dt, timeUntilUpdate);
+	core.Accelerate(dt);
+	collide._octree->advance(core.boxes, collide._octree, dt, timeUntilUpdate);
 
 	//Loop through the boxes for broad phase
 	for(int i = 0; i < core.boxes.size(); i++)
@@ -143,7 +140,7 @@ void PhysicsInterface::Update(void* deltaTime)
 	//by the designer to resolve the collisions.
 }
 
-void PhysicsInterface::Shutdown(void*)
+void PhysicsInterface::Shutdown()
 {
 	for(unsigned int i = 0; i < core.boxes.size(); i++)
 		delete core.boxes[i];

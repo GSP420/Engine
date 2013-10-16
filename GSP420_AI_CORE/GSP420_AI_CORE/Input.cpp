@@ -92,8 +92,8 @@ if(!(MouseCapabilities.dwFlags & DIDC_ATTACHED))
 m_dwAxes = MouseCapabilities.dwAxes;
 m_dwButtons = MouseCapabilities.dwButtons;
 
-SetCursor("arrow.bmp",0,0,0xffffffff);
-SetAttributes(false,1.0f);
+//SetCursor("arrow.bmp",0,0,0xffffffff);
+//SetAttributes(false,1.0f);
 
 return true;
 }//InitMouse

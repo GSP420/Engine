@@ -8,7 +8,7 @@
 #pragma once
 
 #include "Graphics.h"
-#include"ICore.h"
+
 
 class DXManager
 {
