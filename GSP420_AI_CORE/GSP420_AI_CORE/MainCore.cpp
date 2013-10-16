@@ -15,8 +15,9 @@ void MainCore::Startup(HWND hWnd, int width, int height, bool windowed)
 	this->clock = new Clock();
 
 	// init cores
-	this->PhysicsManager = new PhysicsInterface;
-	this->PhysicsManager->Startup(1000);
+	
+	//this->PhysicsManager = new PhysicsInterface;
+	//this->PhysicsManager->Startup(1000);
 
 	this->AudioCoreSound = GetAudioCoreSound();
 	this->AudioCoreSound->Startup();
@@ -28,6 +29,7 @@ void MainCore::Startup(HWND hWnd, int width, int height, bool windowed)
 	this->ScriptManager->Startup();
 
 	this->GraphicsManager->DXInit(hWnd, width, height, windowed);
+	
 
 }
 
@@ -41,10 +43,12 @@ void MainCore::Update()
 
 	this->clock->StartUpdate();
 	// update cores
+	
 	float dt = this->clock->GetElapsed();
-	this->PhysicsManager->Update(dt);
-	this->AIManager->AI_Update();
+	//this->PhysicsManager->Update(dt);
+	//this->AIManager->AI_Update();
 	this->ScriptManager->Update();
+	
 	this->clock->EndUpdate();
 
 	this->clock->EndUpdate();
@@ -65,6 +69,6 @@ void MainCore::Shutdown()
 	delete clock;
 
 	// shutdown cores
-	//this->PhysicsManager->Shutdown(new void*);
+	//this->PhysicsManager->Shutdown();
 
 }
