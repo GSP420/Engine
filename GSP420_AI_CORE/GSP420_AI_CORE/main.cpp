@@ -1,47 +1,38 @@
 #include "MainCore.h"
+#include "AISystem.h"
+#include "PhysicsInterface.h"
+#include "DXManager.h"
+#include "UI.h"
 #include <Windows.h>
 #include <iostream>
 using namespace std;
 
-
-MainCore *engine;
 bool running;
 
 
 int main(int argc, char **argv)
 {
-	engine = new MainCore();
+	// Main core test
+	MainCore* main_core = new MainCore();
 
+	// AI test
+	Agent* player = new Agent();
+	AISystem* ai_core = new AISystem(player);
 
-	engine->Startup();
+	// Physics Test
+	PhysicsInterface* phys_core = new PhysicsInterface();
 
+	// Graphics test
+	DXManager* graphics_core = new DXManager();
 
-	// msg structure to catch window messages
-	MSG msg; 
-	ZeroMemory(&msg, sizeof(msg));
+	// UI test
+	UI* ui_core = new UI();
 
+	// Audio test
+	//
 
-	// game loop
-	while(msg.message != WM_QUIT)
-	{
-		if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
+	// Input test
+	//
 
-
-		engine->Update();
-
-
-		// debug info
-		system("cls");
-		cout << "ELAPSED: " << engine->GetClock()->GetElapsed() << endl;
-		cout << "FPS: " << engine->GetClock()->GetFPS() << endl;
-		cout << "COUNT: " << engine->GetEntityManager()->Count() << endl;
-	}
-
-
-	engine->Shutdown();
 }
 

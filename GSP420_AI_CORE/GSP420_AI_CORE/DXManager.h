@@ -10,7 +10,7 @@
 #include "Graphics.h"
 #include"ICore.h"
 
-class DXManager : public ICore
+class DXManager
 {
 private:
 	IDirect3D9* pD3DObject;

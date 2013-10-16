@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class UI  : public ICore
+class UI
 {
 public:
 	UI(void);

@@ -3,8 +3,6 @@
 #include"AISystem.h"
 #include"Agent.h"
 
-
-
 class AIInterface : public ICore
 {
 public:
@@ -14,5 +12,5 @@ public:
 	void Register(GenericEnemy entity, Behavior* behavior);
 	void Unregister(GenericEnemy entity);
 private:
-	static AISystem*	AI;
+	AISystem*	AI;
 };
