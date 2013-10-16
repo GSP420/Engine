@@ -140,28 +140,6 @@ void UI::update(int i)
 	}
 }
 
-void UI::draw()
-{
-	if(element[0].isActive);
-	
-	if(element[1].isActive);
-
-	if(element[2].isActive);
-	
-	if(element[3].isActive);
-	
-	if(element[4].isActive);
-
-	if(element[5].isActive);
-	
-	if(element[6].isActive);
-	
-	if(element[7].isActive);
-
-	if(element[8].isActive);
-
-	if(element[9].isActive);
-}
 
 
 
