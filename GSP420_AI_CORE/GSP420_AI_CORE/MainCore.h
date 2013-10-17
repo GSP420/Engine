@@ -5,7 +5,7 @@
 //#include "AISystem.h"
 #include "AudioCore.h"
 #include "ScriptingCore.h"
-//#include "PhysicsInterface.h"
+#include "PhysicsInterface.h"
 #include "Input.h"
 #include "UI.h"
 #include "CoreManager.h"
@@ -22,7 +22,7 @@ private:
 	//AISystem*	AIManager;
 	Sound* AudioCoreSound;
 	SoundEffect* AudioCoreSoundEffect;
-	//PhysicsInterface* PhysicsManager;
+	PhysicsInterface* PhysicsManager;
 	Input* InputManager;
 	UI*    UIManager;
 	ScriptingCore* ScriptManager;
@@ -44,7 +44,7 @@ public:
 	//AISystem*	GetAIManager() {return this->AIManager;}
 	Sound* GetAudioCoreSound() {return this->AudioCoreSound; }
 	SoundEffect* GetAudioCoreSoundEffect() {return this->AudioCoreSoundEffect; }
-	//PhysicsInterface* GetPhysicsManager() {return this->PhysicsManager;}
+	PhysicsInterface* GetPhysicsManager() {return this->PhysicsManager;}
 	Input* GetInputManager() {return this->InputManager;}
 	UI* GetUIManager() {return this->UIManager;}
 	ScriptingCore* GetScriptManager() {return this->ScriptManager;}
