@@ -72,3 +72,15 @@ void MainCore::Shutdown()
 	this->PhysicsManager->Shutdown();
 
 }
+
+	MessageManager* MainCore::GetMessageManager() { return this->messageManager; }
+	EntityManager* MainCore::GetEntityManager() { return this->entityManager; }
+	Clock* MainCore::GetClock() { return this->clock; }
+	AISystem*	MainCore::GetAIManager() {return this->AIManager;}
+	Sound* MainCore::GetAudioCoreSound() {return this->AudioCoreSound; }
+	SoundEffect* MainCore::GetAudioCoreSoundEffect() {return this->AudioCoreSoundEffect; }
+	PhysicsInterface* MainCore::GetPhysicsManager() {return this->PhysicsManager;}
+	Input* MainCore::GetInputManager() {return this->InputManager;}
+	UI* MainCore::GetUIManager() {return this->UIManager;}
+	ScriptingCore* MainCore::GetScriptManager() {return this->ScriptManager;}
+	CoreManager* MainCore::GetGraphicsManager() {return this->GraphicsManager;}
