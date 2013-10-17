@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="AISystem.cpp" />
     <ClCompile Include="AudioCore.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Clock.cpp" />
@@ -78,6 +79,7 @@
     <ClCompile Include="Octree.cpp" />
     <ClCompile Include="PhysicsCollision.cpp" />
     <ClCompile Include="PhysicsCore.cpp" />
+    <ClCompile Include="PhysicsInterface.cpp" />
     <ClCompile Include="Pursue.cpp" />
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="ScriptingCore.cpp" />
