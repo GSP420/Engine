@@ -18,6 +18,6 @@ int main(int argc, char **argv)
 	MainCore* main_core = new MainCore();
 	AISystem*	AIManager;
 	PhysicsInterface* PhysicsManager;
-	
+	//test comment
 }
 
