@@ -15,7 +15,8 @@ void MainCore::Startup(HWND hWnd, int width, int height, bool windowed)
 	this->clock = new Clock();
 
 	// init cores
-	
+	this->AIManager = new AISystem();
+
 	this->PhysicsManager = new PhysicsInterface;
 	this->PhysicsManager->Startup(1000);
 

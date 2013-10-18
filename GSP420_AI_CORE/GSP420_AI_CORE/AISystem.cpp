@@ -1,10 +1,14 @@
 #include "AISystem.h"
 
-AISystem::AISystem(Agent* playerAgent)
+AISystem::AISystem()
 {	
-	player = playerAgent;
 	srand(time(NULL));
 	id = 0;
+}
+
+AISystem::~AISystem()
+{	
+
 }
 
 void AISystem::AI_Update()
@@ -19,6 +23,11 @@ void AISystem::AI_Update()
 			currentBehavior->behave();
 		}
 	}
+}
+
+void AISystem::registerPlayer(Agent* playerAgent)
+{
+	player = playerAgent;
 }
 
 void AISystem::registerAgent(GenericEnemy agent, Behavior* behavior)
