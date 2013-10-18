@@ -2,8 +2,6 @@
 #include <Windows.h>
 #include <iostream>
 
-#include "AISystem.h"
-#include "PhysicsInterface.h"
 
 
 
