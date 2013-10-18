@@ -26,10 +26,8 @@ class AISystem
 		hash_map<int, Behavior*>::iterator agentIterator;	// list iterator
 
 	public:
-		AISystem();					// constructor
-		~AISystem();					// constructor
+		AISystem(Agent*);					// constructor
 		void AI_Update();					// called to update all agents
-		void registerPlayer(Agent*);		// register the player object 
 		void registerAgent(GenericEnemy entity, Behavior*);	// register an agent with the AI system
 		void unregisterAgent(GenericEnemy entity);			// remove an agent from the AI system
 };
