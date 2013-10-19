@@ -15,8 +15,7 @@ void MainCore::Startup(HWND hWnd, int width, int height, bool windowed)
 	this->clock = new Clock();
 
 	// init cores
-	this->AIManager = new AISystem();
-
+	
 	this->PhysicsManager = new PhysicsInterface;
 	this->PhysicsManager->Startup(1000);
 
@@ -47,7 +46,7 @@ void MainCore::Update()
 	
 	float dt = this->clock->GetElapsed();
 	this->PhysicsManager->Update(dt);
-	//this->AIManager->AI_Update();
+	this->AIManager->AI_Update();
 	this->ScriptManager->Update();
 	
 	this->clock->EndUpdate();

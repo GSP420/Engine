@@ -6,11 +6,6 @@ AISystem::AISystem()
 	id = 0;
 }
 
-AISystem::~AISystem()
-{	
-
-}
-
 void AISystem::AI_Update()
 {	// called during main update loop, causes all agents to update
 	if(agents.size() > 0)
@@ -25,11 +20,6 @@ void AISystem::AI_Update()
 	}
 }
 
-void AISystem::registerPlayer(Agent* playerAgent)
-{
-	player = playerAgent;
-}
-
 void AISystem::registerAgent(GenericEnemy agent, Behavior* behavior)
 {	// add a new agent to the AI system
 	agent.self->setAgentId(id++);
@@ -42,4 +32,9 @@ void AISystem::unregisterAgent(GenericEnemy agent)
 	agent.self->getAgentId(temp);
 	delete agents[temp];
 	agents.erase(temp);
+}
+
+void AISystem::regeisterPlayer(Agent* playerAgent)
+{
+	player = playerAgent;
 }
