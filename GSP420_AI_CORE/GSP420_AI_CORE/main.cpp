@@ -5,11 +5,15 @@ using namespace std;
 
 bool running;
 
+void InitWind();
 
 int main(int argc, char **argv)
 {
 	//window handle
 	HWND hWnd;
+	int width;
+	int height;
+	bool windowed;
 	//create engine, using MainCore to instantiate a singelton of each otehr core
 	MainCore* main_core = new MainCore();
 	//create pointer to access each core through MainCore
@@ -22,6 +26,12 @@ int main(int argc, char **argv)
 	ScriptingCore* script_core = main_core->GetScriptManager();
 	CoreManager* graphics_core = main_core->GetGraphicsManager();
 
+	//default window size
+	width = 800;
+	height = 600;
+	windowed = true;
+
+	main_core->Startup(hWnd, width, height, windowed);
 	/*
 	gamestate to tell the engine what state the game is in. Menu, Game Logic, Credtis, etc.
 	swtich cases to switch between the different states running the appropiate functions
@@ -94,4 +104,34 @@ int main(int argc, char **argv)
 	}
 	while(gameState != 4);
 	
+}
+
+void InitWindow(void)
+{
+	WNDCLASSEX wndClass;  
+	ZeroMemory(&wndClass, sizeof(wndClass));
+
+	// set up the window
+	wndClass.cbSize			= sizeof(WNDCLASSEX);			// size of window structure
+	wndClass.lpfnWndProc	= (WNDPROC)WndProc;				// message callback
+	wndClass.lpszClassName	= WINDOW_TITLE;					// class name
+	wndClass.hInstance		= g_hInstance;					// handle to the application
+	wndClass.hCursor		= LoadCursor(NULL, IDC_ARROW);	// default cursor
+	wndClass.hbrBackground	= (HBRUSH)(COLOR_WINDOWFRAME);	// background brush
+
+	// register a new type of window
+	RegisterClassEx(&wndClass);
+
+	g_hWnd = CreateWindow(
+		WINDOW_TITLE, WINDOW_TITLE, 							// window class name and title
+		g_bWindowed ? WS_OVERLAPPEDWINDOW | WS_VISIBLE:(WS_POPUP | WS_VISIBLE),// window style
+		CW_USEDEFAULT, CW_USEDEFAULT,							// x and y coordinates
+		SCREEN_WIDTH, SCREEN_HEIGHT,							// width and height of window
+		NULL, NULL,												// parent window and menu
+		g_hInstance,											// handle to application
+		NULL);
+
+	// Display the window
+	ShowWindow(g_hWnd, SW_SHOW);
+	UpdateWindow(g_hWnd);
 }
