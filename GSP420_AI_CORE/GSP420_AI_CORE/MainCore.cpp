@@ -20,15 +20,16 @@ void MainCore::Startup(HWND hWnd, int width, int height, bool windowed)
 	this->PhysicsManager = new PhysicsInterface;
 	this->PhysicsManager->Startup(1000);
 
-	this->AudioCoreSound = GetAudioCoreSound();
+	this->AudioCoreSound = new Sound();
 	this->AudioCoreSound->Startup();
 
-	this->InputManager = GetInputManager();
+	this->InputManager = new Input();
 	this->InputManager->Startup();
 
-	this->ScriptManager = GetScriptManager();
-	this->ScriptManager->Startup();
+	//this->ScriptManager = new ScriptingCore();
+	//this->ScriptManager->Startup();
 
+	this->GraphicsManager = new CoreManager();
 	this->GraphicsManager->DXInit(hWnd, width, height, windowed);
 	
 
