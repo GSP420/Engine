@@ -1,21 +1,85 @@
 #include "MainCore.h"
-#include <Windows.h>
 #include <iostream>
 using namespace std;
 
+//window handle
+HWND hWnd;
+
 bool running;
 
-void InitWind();
-
-int main(int argc, char **argv)
+//void InitWind(HINSTANCE, int);
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	//window handle
-	HWND hWnd;
-	int width;
-	int height;
-	bool windowed;
+        switch(msg)
+        {
+			case WM_CLOSE:
+			case WM_DESTROY:
+				PostQuitMessage(0);
+				break;
+			default:
+				return DefWindowProc(hwnd, msg, wParam, lParam);
+        }
+        return 0;
+}
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+
+	//InitWind(hInstance, nCmdShow);
+
+
+
+	WNDCLASSEX wcex;
+
+    wcex.cbSize = sizeof(WNDCLASSEX);
+    wcex.style          = CS_HREDRAW | CS_VREDRAW;
+    wcex.lpfnWndProc    = WndProc;
+    wcex.cbClsExtra     = 0;
+    wcex.cbWndExtra     = 0;
+    wcex.hInstance      = hInstance;
+    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
+    wcex.hCursor        = LoadCursor(NULL, IDC_ARROW);
+    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
+    wcex.lpszMenuName   = NULL;
+    wcex.lpszClassName  = "gameDemoWindow";
+    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
+
+	// register a new type of window
+	if (!RegisterClassEx(&wcex))
+    {
+        MessageBox(
+        NULL,
+        "Window Error",
+        "Could not create window",
+        NULL);
+    }
+
+	static TCHAR szWindowClass[] = "gameDemoWindow";
+	static TCHAR szTitle[] = "Game Demo";
+
+	hWnd = CreateWindow(
+		szWindowClass,
+		szTitle,
+		WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT, CW_USEDEFAULT,
+		500, 100,
+		NULL,
+		NULL,
+		hInstance,
+		NULL
+	);
+
+	// Display the window
+	ShowWindow(hWnd,nCmdShow);
+	UpdateWindow(hWnd);
+
+	int width = 640;
+	int height = 480;
+	bool windowed = true;
+
 	//create engine, using MainCore to instantiate a singelton of each otehr core
 	MainCore* main_core = new MainCore();
+	main_core->Startup(hWnd, width, height, windowed);
 	//create pointer to access each core through MainCore
 	AISystem* ai_core = main_core->GetAIManager();
 	Sound* sound_core = main_core->GetAudioCoreSound();
@@ -103,35 +167,53 @@ int main(int argc, char **argv)
 		continue;
 	}
 	while(gameState != 4);
-	
+	return 0;
 }
 
-void InitWindow(void)
-{
-	WNDCLASSEX wndClass;  
-	ZeroMemory(&wndClass, sizeof(wndClass));
 
-	// set up the window
-	wndClass.cbSize			= sizeof(WNDCLASSEX);			// size of window structure
-	wndClass.lpfnWndProc	= (WNDPROC)WndProc;				// message callback
-	wndClass.lpszClassName	= WINDOW_TITLE;					// class name
-	wndClass.hInstance		= g_hInstance;					// handle to the application
-	wndClass.hCursor		= LoadCursor(NULL, IDC_ARROW);	// default cursor
-	wndClass.hbrBackground	= (HBRUSH)(COLOR_WINDOWFRAME);	// background brush
+void InitWindow(HINSTANCE hInstance, int nCmdShow)
+{
+	WNDCLASSEX wcex;
+
+    wcex.cbSize = sizeof(WNDCLASSEX);
+    wcex.style          = CS_HREDRAW | CS_VREDRAW;
+    wcex.lpfnWndProc    = WndProc;
+    wcex.cbClsExtra     = 0;
+    wcex.cbWndExtra     = 0;
+    wcex.hInstance      = hInstance;
+    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
+    wcex.hCursor        = LoadCursor(NULL, IDC_ARROW);
+    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
+    wcex.lpszMenuName   = NULL;
+    wcex.lpszClassName  = "gameDemoWindow";
+    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
 
 	// register a new type of window
-	RegisterClassEx(&wndClass);
+	if (!RegisterClassEx(&wcex))
+    {
+        MessageBox(
+        NULL,
+        "Window Error",
+        "Could not create window",
+        NULL);
+    }
 
-	g_hWnd = CreateWindow(
-		WINDOW_TITLE, WINDOW_TITLE, 							// window class name and title
-		g_bWindowed ? WS_OVERLAPPEDWINDOW | WS_VISIBLE:(WS_POPUP | WS_VISIBLE),// window style
-		CW_USEDEFAULT, CW_USEDEFAULT,							// x and y coordinates
-		SCREEN_WIDTH, SCREEN_HEIGHT,							// width and height of window
-		NULL, NULL,												// parent window and menu
-		g_hInstance,											// handle to application
-		NULL);
+	static TCHAR szWindowClass[] = "gameDemoWindow";
+	static TCHAR szTitle[] = "Game Demo";
+
+	hWnd = CreateWindow(
+		szWindowClass,
+		szTitle,
+		WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT, CW_USEDEFAULT,
+		500, 100,
+		NULL,
+		NULL,
+		hInstance,
+		NULL
+	);
 
 	// Display the window
-	ShowWindow(g_hWnd, SW_SHOW);
-	UpdateWindow(g_hWnd);
+	ShowWindow(hWnd,nCmdShow);
+	UpdateWindow(hWnd);
 }
