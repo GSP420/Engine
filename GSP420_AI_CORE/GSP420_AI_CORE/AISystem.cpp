@@ -1,8 +1,7 @@
 #include "AISystem.h"
 
-AISystem::AISystem(Agent* playerAgent)
+AISystem::AISystem()
 {	
-	player = playerAgent;
 	srand(time(NULL));
 	id = 0;
 }
@@ -33,4 +32,9 @@ void AISystem::unregisterAgent(GenericEnemy agent)
 	agent.self->getAgentId(temp);
 	delete agents[temp];
 	agents.erase(temp);
+}
+
+void AISystem::regeisterPlayer(Agent* playerAgent)
+{
+	player = playerAgent;
 }

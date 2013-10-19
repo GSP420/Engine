@@ -46,7 +46,7 @@ void MainCore::Update()
 	
 	float dt = this->clock->GetElapsed();
 	this->PhysicsManager->Update(dt);
-	//this->AIManager->AI_Update();
+	this->AIManager->AI_Update();
 	this->ScriptManager->Update();
 	
 	this->clock->EndUpdate();
