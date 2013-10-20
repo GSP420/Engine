@@ -54,7 +54,9 @@ public:
 	void Shutdown ();
 
 	CoreManager() {
-
+		text = new Text;
+		cam = new Camera;
+		manager = new DXManager;
 	}
 
 	~CoreManager() {

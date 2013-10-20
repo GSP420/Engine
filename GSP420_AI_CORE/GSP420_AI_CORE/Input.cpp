@@ -13,7 +13,9 @@ Input::Input(void)
 
 bool Input::InitDirectInput(void)
 {
-if(FAILED(DirectInput8Create(GetModuleHandle(NULL),DIRECTINPUT_VERSION,IID_IDirectInput8,(void**)&m_pDIObject,NULL)))
+	HRESULT hr;
+	hr = DirectInput8Create(GetModuleHandle(NULL),DIRECTINPUT_VERSION,IID_IDirectInput8,(void**)&m_pDIObject,NULL);
+if(FAILED(hr))
  {
  MessageBox(NULL,"DirectInput8Create() failed!","InitDirectInput()",MB_OK);
  return false;
@@ -24,25 +26,30 @@ return true;
 
 bool Input::InitKeyboard(void)
 {
-if(FAILED(m_pDIObject->CreateDevice(GUID_SysKeyboard,&m_pDIKeyboardDevice,NULL)))
+	HRESULT hr;
+	hr = m_pDIObject->CreateDevice(GUID_SysKeyboard,&m_pDIKeyboardDevice,NULL);
+if(FAILED(hr))
  {
  MessageBox(NULL,"CreateDevice() failed!","InitKeyboard()",MB_OK);
  return false;
  }
 
-if(FAILED(m_pDIKeyboardDevice->SetDataFormat(&c_dfDIKeyboard)))
+	hr = m_pDIKeyboardDevice->SetDataFormat(&c_dfDIKeyboard);
+if(FAILED(hr))
  {
  MessageBox(NULL,"SetDataFormat() failed!","InitKeyboard()",MB_OK);
  return false;
  }
 
-if(FAILED(m_pDIKeyboardDevice->SetCooperativeLevel(NULL,DISCL_BACKGROUND | DISCL_NONEXCLUSIVE)))
+	hr = m_pDIKeyboardDevice->SetCooperativeLevel(NULL,DISCL_BACKGROUND | DISCL_NONEXCLUSIVE);
+if(FAILED(hr))
  {
  MessageBox(NULL,"SetCooperativeLevel() failed!","InitKeyboard()",MB_OK);
  return false;
  }
 
-if(FAILED(m_pDIKeyboardDevice->Acquire()))
+	hr = m_pDIKeyboardDevice->Acquire();
+if(FAILED(hr))
  {
  MessageBox(NULL,"Acquire() failed!","InitKeyboard()",MB_OK);
  return false;
@@ -55,26 +62,32 @@ bool Input::InitMouse(void)
 {
 //device capabilities
 DIDEVCAPS MouseCapabilities; 
+	
+	HRESULT hr;
 
-if(FAILED(m_pDIObject->CreateDevice(GUID_SysMouse,&m_pDIMouseDevice,NULL)))
+	hr = m_pDIObject->CreateDevice(GUID_SysMouse,&m_pDIMouseDevice,NULL);
+if(FAILED(hr))
  {
  MessageBox(NULL,"CreateDevice() failed!","InitMouse()",MB_OK);
  return false;
  }
 
-if(FAILED(m_pDIMouseDevice->SetDataFormat(&c_dfDIMouse2)))
+	hr = m_pDIMouseDevice->SetDataFormat(&c_dfDIMouse2);
+if(FAILED(hr))
  {
  MessageBox(NULL,"SetDataFormat() failed!","InitMouse()",MB_OK);
  return false;
  }
 
-if(FAILED(m_pDIMouseDevice->SetCooperativeLevel(NULL,DISCL_BACKGROUND | DISCL_NONEXCLUSIVE)))
+	hr = m_pDIMouseDevice->SetCooperativeLevel(NULL,DISCL_BACKGROUND | DISCL_NONEXCLUSIVE);
+if(FAILED(hr))
  {
  MessageBox(NULL,"SetCooperativeLevel() failed!","InitMouse()",MB_OK);
  return false;
  }
 
-if(FAILED(m_pDIMouseDevice->Acquire()))
+	hr = m_pDIMouseDevice->Acquire();
+if(FAILED(hr))
  {
  MessageBox(NULL,"Acquire() failed!","InitMouse()",MB_OK);
  return false;
@@ -104,7 +117,9 @@ Input::~Input(void)
 
 void Input::Update(void)
 {
-if(FAILED(m_pDIKeyboardDevice->GetDeviceState(sizeof(KeyBuffer),(LPVOID)&KeyBuffer)))
+	HRESULT hr;
+	hr = m_pDIKeyboardDevice->GetDeviceState(sizeof(KeyBuffer),(LPVOID)&KeyBuffer);
+if(FAILED(hr))
  {
  MessageBox(NULL,"GetDeviceState() failed!","Update()",MB_OK);
 
@@ -125,10 +140,17 @@ void Input::Startup()
 	
 	//Clears the buffer before use
 	ZeroMemory(&KeyBuffer, 256);
+	
+	bool result = false;
 
-	if(!InitDirectInput()) MessageBox (NULL, "InitDirectInput Failed", "ERROR", MB_OK);
-	else if(!InitKeyboard()) MessageBox (NULL, "InitKeyboard Failed", "ERROR", MB_OK);
-	else if(!InitMouse()) MessageBox (NULL, "InitMouse Failed", "Error", MB_OK);
+	result = InitDirectInput();
+	if(!result) MessageBox (NULL, "InitDirectInput Failed", "ERROR", MB_OK);
+	
+	result = InitKeyboard();
+	if(!result) MessageBox (NULL, "InitKeyboard Failed", "ERROR", MB_OK);
+	
+	result = InitMouse();
+	if(!result) MessageBox (NULL, "InitMouse Failed", "Error", MB_OK);
 
 }
 void Input::ShutDown()

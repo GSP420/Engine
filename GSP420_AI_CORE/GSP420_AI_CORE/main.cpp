@@ -119,6 +119,34 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				//graphics_core->SetText(); //fill in the parameters for a pressed keyboard button to exit program here
 				
 				main_core->Update();
+
+				
+				if(input_core->APressed())
+				{
+					cout << "A Key was pressed." << endl;
+				}
+
+				if(input_core->DPressed())
+				{
+					cout << "D Key was pressed." << endl;
+				}
+
+				if(input_core->SPressed())
+				{
+					cout << "S Key was pressed." << endl;
+				}
+
+				if(input_core->WPressed())
+				{
+					cout << "W Key was pressed." << endl;
+				}
+
+				if(input_core->SpaceBar())
+				{
+					gameState = 4;
+				}
+
+				
 			}
 			break;
 		case 2://game logic state
@@ -134,7 +162,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			Entity* player;
 			player = new Entity;
 			ai_core->regeisterPlayer(&player->agentData);
-			while(gameState == 1)
+			while(gameState == 2)
 			{
 				//update
 				main_core->Update();
@@ -144,7 +172,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			
 			//setup credits with UI and Graphics
 			//loop till gameState changes
-			while(gameState == 1)
+			while(gameState == 3)
 			{
 				//update
 				main_core->Update();
