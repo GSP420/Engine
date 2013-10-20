@@ -60,6 +60,8 @@ void MainCore::Update()
 	this->GraphicsManager->Update();
 	this->clock->EndRender();
 
+	//update input core
+	this->InputManager->Update();
 	
 }
 
