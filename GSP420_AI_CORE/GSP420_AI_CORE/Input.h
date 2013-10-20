@@ -73,7 +73,7 @@ public:
 						//check for mouse button
     bool                 MouseButtonDown(int);
 
-
+private:
 
 	LPDIRECTINPUT8			m_pDIObject;
 	LPDIRECTINPUTDEVICE8	m_pDIKeyboardDevice;
