@@ -18,10 +18,9 @@ public:
 	void Update();
 	void Shutdown();
 
-
+	Script *script;
 	
 private:
-	Script *script;
 	int width;		// SCREEN WIDTH
 	int height;		// SCREEN HEIGHT
 	int color;		// COLORDEPTH
