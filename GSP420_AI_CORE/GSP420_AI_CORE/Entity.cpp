@@ -30,3 +30,9 @@ void Entity::Removed()
 {
 	//renderedItem.Removed(eID);
 };
+
+void Entity::SetEntity(std::string eName, std::string eType)
+{
+	name = eName;
+	type = eType;
+};
