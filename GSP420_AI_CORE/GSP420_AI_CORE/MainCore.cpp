@@ -35,8 +35,10 @@ void MainCore::Startup(HWND hWnd, int width, int height, bool windowed)
 
 }
 
-void MainCore::Update()
+void MainCore::Update(Entity* enemy, int gameState)
 {
+	D3DXVECTOR3 temp;
+	D3DXVECTOR3 temp2, temp3;
 	this->clock->UpdateElapsed();
 	this->clock->UpdateFPS();
 
@@ -47,21 +49,29 @@ void MainCore::Update()
 	// update cores
 	
 	float dt = this->clock->GetElapsed();
-	this->PhysicsManager->Update(dt);
-	this->AIManager->AI_Update();
+	if(gameState == 2)
+	{
+		this->AIManager->AI_Update();
+		//from AI update and use physics for further calculations
+		enemy->agentData.getPosition(temp);
+		enemy->agentData.getAcceleration(temp2);
+		enemy->agentData.getDestination(temp3);
+		temp2 += temp3; //check this for correctness
+		this->PhysicsManager->setAccel(temp2);
+		temp2 = this->PhysicsManager->getVel();
+		enemy->agentData.setAcceleration(temp2);
+		enemy->agentData.setPosition(temp + temp2);
+		this->PhysicsManager->Update(dt);
+	}
+
 	this->ScriptManager->Update();
-	
 	this->clock->EndUpdate();
-
 	this->clock->EndUpdate();
-
 	this->clock->StartRender();
 	// update gfx core
 	this->GraphicsManager->Update();
 	this->clock->EndRender();
 
-	//update input core
-	this->InputManager->Update();
 	
 }
 
@@ -77,14 +87,14 @@ void MainCore::Shutdown()
 
 }
 
-	MessageManager* MainCore::GetMessageManager() { return this->messageManager; }
-	EntityManager* MainCore::GetEntityManager() { return this->entityManager; }
-	Clock* MainCore::GetClock() { return this->clock; }
-	AISystem*	MainCore::GetAIManager() {return this->AIManager;}
-	Sound* MainCore::GetAudioCoreSound() {return this->AudioCoreSound; }
-	SoundEffect* MainCore::GetAudioCoreSoundEffect() {return this->AudioCoreSoundEffect; }
-	PhysicsInterface* MainCore::GetPhysicsManager() {return this->PhysicsManager;}
-	Input* MainCore::GetInputManager() {return this->InputManager;}
-	UI* MainCore::GetUIManager() {return this->UIManager;}
-	ScriptingCore* MainCore::GetScriptManager() {return this->ScriptManager;}
-	CoreManager* MainCore::GetGraphicsManager() {return this->GraphicsManager;}
+MessageManager* MainCore::GetMessageManager() { return this->messageManager; }
+EntityManager* MainCore::GetEntityManager() { return this->entityManager; }
+Clock* MainCore::GetClock() { return this->clock; }
+AISystem*	MainCore::GetAIManager() {return this->AIManager;}
+Sound* MainCore::GetAudioCoreSound() {return this->AudioCoreSound; }
+SoundEffect* MainCore::GetAudioCoreSoundEffect() {return this->AudioCoreSoundEffect; }
+PhysicsInterface* MainCore::GetPhysicsManager() {return this->PhysicsManager;}
+Input* MainCore::GetInputManager() {return this->InputManager;}
+UI* MainCore::GetUIManager() {return this->UIManager;}
+ScriptingCore* MainCore::GetScriptManager() {return this->ScriptManager;}
+CoreManager* MainCore::GetGraphicsManager() {return this->GraphicsManager;}

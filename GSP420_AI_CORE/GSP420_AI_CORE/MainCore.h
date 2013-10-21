@@ -35,7 +35,7 @@ public:
 	~MainCore(void);
 
 	void Startup(HWND hWnd, int width, int height, bool windowed);
-	void Update();
+	void Update(Entity* enemy, int gameState);
 	void Shutdown();
 	MessageManager* GetMessageManager();
 	EntityManager* GetEntityManager();

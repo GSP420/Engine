@@ -7,23 +7,24 @@
 class Agent
 {
 	private:
-		float orientation;
-		float rotation;
-		float position[3];
-		float velocity[3];
-		float destination[3];
+		float	rotation[3];
+		float	position[3];
+		float	velocity[3];
+		float	destination[3];
 		int		agentId;
+		float	acceleration[3];
 	public:
 		Agent();
-		float getOrientation();
-		float getRotation();
-		void setRotation(float);
+		void getRotation(float[3]);
+		void setRotation(float[3]);
 		void getPosition(float[3]);
 		void setPosition(float[3]);
 		void getVelocity(float[3]);
 		void setVelocity(float[3]);
 		void getDestination(float[3]);
 		void setDestination(float[3]);
+		void getAcceleration(float[3]);
+		void setAcceleration(float[3]);
 		void setAgentId(int);
 		void getAgentId(int);
 };

@@ -2,8 +2,9 @@
 
 Agent::Agent()
 {
-	orientation = 0;
-	rotation = 0;
+	rotation[0] = 0;
+	rotation[1] = 0;
+	rotation[2] = 0;
 
 	position[0] = 0;
 	position[1] = 0;
@@ -20,26 +21,25 @@ Agent::Agent()
 	agentId = 0;
 }
 
-float Agent::getOrientation()
+void Agent::getRotation(float rot[3])
 {
-	return orientation;
+	rot[0] = rotation[0];
+	rot[1] = rotation[1];
+	rot[2] = rotation[2];
 }
 
-float Agent::getRotation()
+void Agent::setRotation(float source[3])
 {
-	return rotation;
+	rotation[0] = source[0];
+	rotation[1] = source[1];
+	rotation[2] = source[2];
 }
 
-void Agent::setRotation(float source)
+void Agent::getPosition(float source[3])
 {
-	rotation = source;
-}
-
-void Agent::getPosition(float destination[3])
-{
-	destination[0] = position[0];
-	destination[1] = position[1];
-	destination[2] = position[2];
+	source[0] = position[0];
+	source[1] = position[1];
+	source[2] = position[2];
 }
 
 void Agent::setPosition(float source[3])
@@ -49,11 +49,11 @@ void Agent::setPosition(float source[3])
 	position[2] = source[2];
 }
 
-void Agent::getVelocity(float destination[3])
+void Agent::getVelocity(float source[3])
 {
-	destination[0] = velocity[0];
-	destination[1] = velocity[1];
-	destination[2] = velocity[2];
+	source[0] = velocity[0];
+	source[1] = velocity[1];
+	source[2] = velocity[2];
 }
 
 void Agent::setVelocity(float source[3])
@@ -85,4 +85,18 @@ void Agent::setAgentId(int id)
 void Agent::getAgentId(int id)
 {
 	id = agentId;
+}
+
+void Agent::getAcceleration(float accel[3])
+{
+	accel[0] = acceleration[0];
+	accel[0] = acceleration[0];
+	accel[0] = acceleration[0];
+}
+
+void Agent::setAcceleration(float accel[3])
+{
+	acceleration[0] = accel[0];
+	acceleration[1] = accel[1];
+	acceleration[2] = accel[2];
 }

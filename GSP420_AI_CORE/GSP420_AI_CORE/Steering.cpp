@@ -8,14 +8,6 @@ void Steering::MatchVelocity(Agent* currentAgent, Agent* targetAgent)
 	currentAgent->setVelocity(targetVelocity);
 }
 
-//turn towards target, *****INCOMPLETE*****
-void Steering::RotationAlign(Agent* currentAgent, Agent* targetAgent)
-{
-	currentAgent->setRotation(targetAgent->getOrientation() - currentAgent->getOrientation());
-	//now need to put the rotation value in the range of -PI and PI
-	
-}
-
 void Steering::Seek(Agent* currentAgent, Agent* targetAgent)
 {
 	float targetPosition[3];
