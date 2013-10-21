@@ -74,6 +74,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//create engine, using MainCore to instantiate a singelton of each otehr core
 	MainCore* main_core = new MainCore();
+
+	//default window size
+	width = 800;
+	height = 600;
+	windowed = true;
+
+	main_core->Startup(hWnd, width, height, windowed);
+
 	//create pointer to access each core through MainCore
 	AISystem* ai_core = main_core->GetAIManager();
 	Sound* sound_core = main_core->GetAudioCoreSound();
@@ -84,12 +92,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	ScriptingCore* script_core = main_core->GetScriptManager();
 	CoreManager* graphics_core = main_core->GetGraphicsManager();
 
-	//default window size
-	width = 800;
-	height = 600;
-	windowed = true;
 
-	main_core->Startup(hWnd, width, height, windowed);
 	/*
 	gamestate to tell the engine what state the game is in. Menu, Game Logic, Credtis, etc.
 	swtich cases to switch between the different states running the appropiate functions
@@ -119,34 +122,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				//graphics_core->SetText(); //fill in the parameters for a pressed keyboard button to exit program here
 				
 				main_core->Update();
-
-				
-				if(input_core->APressed())
-				{
-					cout << "A Key was pressed." << endl;
-				}
-
-				if(input_core->DPressed())
-				{
-					cout << "D Key was pressed." << endl;
-				}
-
-				if(input_core->SPressed())
-				{
-					cout << "S Key was pressed." << endl;
-				}
-
-				if(input_core->WPressed())
-				{
-					cout << "W Key was pressed." << endl;
-				}
-
-				if(input_core->SpaceBar())
-				{
-					gameState = 4;
-				}
-
-				
 			}
 			break;
 		case 2://game logic state
