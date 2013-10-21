@@ -24,14 +24,14 @@ public:
 
 						//updates device status
 	void					Update(void);
-	void					Startup();
+	void					Startup(HWND hWnd);
 	void					ShutDown();
 
 
 							//initializations
 	bool					InitDirectInput(void);
-	bool					InitKeyboard(void);
-	bool					InitMouse(void);
+	bool					InitKeyboard(HWND hWnd);
+	bool					InitMouse(HWND hWnd);
 
 
 
@@ -45,6 +45,13 @@ public:
 	bool					RBUTTONPressed();
 
 							//Keyhold Checks
+
+/*
+
+							**********************************************************************************
+							**************			HOLD CHECKS HAVE BEEN DEPRECATED			**************
+							**********************************************************************************
+
 	bool					WHeld();
 	bool					AHeld();
 	bool					SHeld();
@@ -52,6 +59,7 @@ public:
 	bool					SpaceBarHeld();
 	bool					LBUTTONHeld();
 	bool					RBUTTONHeld();
+*/
 
 
 						//draws mouse cursor
@@ -81,6 +89,7 @@ private:
 
 	char					KeyBuffer[256];
 	bool					KeyWasDown[5];
+	bool					ButtonWasDown[2];
 	
 	//cursor texture
 	LPDIRECT3DTEXTURE9   m_pCursorTexture;      

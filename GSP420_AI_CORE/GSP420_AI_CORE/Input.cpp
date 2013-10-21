@@ -4,10 +4,20 @@
 //Macro needed to reply whether or not a key being checked was pressed
 #define KEYDOWN(name, key) (name[key] & 0x80)
 
+//Macro to check whether or not a mouse button was pressed
+#define BUTTONDOWN(name, key) (name.rgbButtons[key] & 0x80)
 
 Input::Input(void)
 {
-	
+	for(int i = 0; i < sizeof(KeyWasDown);i++)
+	{
+		KeyWasDown[i] = false;
+	}
+
+	for(int j = 0; j < sizeof(ButtonWasDown);j++)
+	{
+		ButtonWasDown[j] = false;
+	}	
 }//Input
 
 
@@ -24,7 +34,7 @@ if(FAILED(hr))
 return true;
 }//InitDirectInput
 
-bool Input::InitKeyboard(void)
+bool Input::InitKeyboard(HWND hWnd)
 {
 	HRESULT hr;
 	hr = m_pDIObject->CreateDevice(GUID_SysKeyboard,&m_pDIKeyboardDevice,NULL);
@@ -58,7 +68,7 @@ if(FAILED(hr))
 return true;
 }//InitKeyboard
 
-bool Input::InitMouse(void)
+bool Input::InitMouse(HWND hWnd)
 {
 //device capabilities
 DIDEVCAPS MouseCapabilities; 
@@ -132,7 +142,7 @@ if(DIERR_INPUTLOST == m_pDIMouseDevice->GetDeviceState(sizeof(m_MouseState),(LPV
 
 
 }//Update
-void Input::Startup()
+void Input::Startup(HWND hWnd)
 {
 	m_pDIObject = NULL;
 	m_pDIKeyboardDevice = NULL;
@@ -140,18 +150,29 @@ void Input::Startup()
 	
 	//Clears the buffer before use
 	ZeroMemory(&KeyBuffer, 256);
-	
+
 	bool result = false;
-
+	
 	result = InitDirectInput();
-	if(!result) MessageBox (NULL, "InitDirectInput Failed", "ERROR", MB_OK);
-	
-	result = InitKeyboard();
-	if(!result) MessageBox (NULL, "InitKeyboard Failed", "ERROR", MB_OK);
-	
-	result = InitMouse();
-	if(!result) MessageBox (NULL, "InitMouse Failed", "Error", MB_OK);
 
+	if(!result)
+	{
+		MessageBox (NULL, "InitDirectInput Failed", "ERROR", MB_OK);
+	}
+	
+	result = false;
+	result = InitKeyboard(hWnd);
+	if(!result)
+	{
+		MessageBox (NULL, "InitKeyboard Failed", "ERROR", MB_OK);
+	}
+
+	result = false;
+	result = InitMouse(hWnd);
+	if(!result)
+	{
+		MessageBox (NULL, "InitMouse Failed", "Error", MB_OK);
+	}
 }
 void Input::ShutDown()
 {
@@ -265,8 +286,12 @@ bool Input::SpaceBar()
 }
 #pragma endregion KeyInput
 
+/*
 #pragma region KeyHeldDown
 
+							**********************************************************************************
+							**************			KEY HELD DOWN HAS BEEN DEPRECATED			**************
+							**********************************************************************************
 bool Input::WHeld()
 {
 	if (KEYDOWN(KeyBuffer, DIK_W))
@@ -312,28 +337,50 @@ bool Input::SpaceBarHeld()
 	return false;
 }
 #pragma endregion KeyHeldDown
-
+*/
 #pragma region MouseInput
 
 bool Input::LBUTTONPressed()
 {
- //Check the mouse left button is pressed or not
-   if ((GetKeyState(VK_LBUTTON) & 0x80) != 0)
+	//Check the mouse left button is pressed or not
+	if (BUTTONDOWN(m_MouseState, 0))
 	{
-		return true; 
+		ButtonWasDown[0] = true;
+		return false;
 	}
+	
+	if (!BUTTONDOWN(m_MouseState,0) && ButtonWasDown[0])
+	{
+		ButtonWasDown[0] = false;
+		return true;
+	}
+
 	return false;
 }
 
 bool Input::RBUTTONPressed()
 {
    //Check the mouse right button is pressed or not
-   if ((GetKeyState(VK_RBUTTON) & 0x80) != 0)
+	if (BUTTONDOWN(m_MouseState, 1))
 	{
-		return true; 
+		ButtonWasDown[1] = true;
+		return false;
 	}
+	
+	if (!BUTTONDOWN(m_MouseState,1) && ButtonWasDown[1])
+	{
+		ButtonWasDown[1] = false;
+		return true;
+	}
+
 	return false;
 }
+
+/*
+
+							**********************************************************************************
+							**************			MOUSE HELD DOWN HAS BEEN DEPRECATED			**************
+							**********************************************************************************
 
 bool Input::LBUTTONHeld()
 
@@ -354,7 +401,7 @@ bool Input::RBUTTONHeld()
 	}
 	return false;
 }
-
+*/
 
 
 #pragma endregion MouseInput
