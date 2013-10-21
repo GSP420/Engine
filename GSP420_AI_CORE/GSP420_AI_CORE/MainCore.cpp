@@ -24,7 +24,7 @@ void MainCore::Startup(HWND hWnd, int width, int height, bool windowed)
 	this->AudioCoreSound->Startup();
 
 	this->InputManager = new Input();
-	this->InputManager->Startup();
+	this->InputManager->Startup(hWnd);
 
 	//this->ScriptManager = new ScriptingCore();
 	//this->ScriptManager->Startup();
