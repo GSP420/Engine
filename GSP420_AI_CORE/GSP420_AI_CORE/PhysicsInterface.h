@@ -46,6 +46,7 @@ Main()
 #pragma once
 #include "PhysicsCore.h"
 #include "PhysicsCollision.h"
+#include "PhysicsUtils.h"
 
 
 struct PhysicsFloats
@@ -66,17 +67,17 @@ public:
 
 	bool RayCast3D(D3DXVECTOR3 startPoint, D3DXVECTOR3 directionVector, list<AABB> collidables, int maxTestLimit, RayCastContact &contactOutput);
 	bool RayCast2D(D3DXVECTOR2 startPoint, D3DXVECTOR2 directionVector, list<AABB> collidables, int maxTestLimit, RayCastContact &contactOutput);
-	void setAccel(D3DXVECTOR3 acceleration);
+	void setAccel(D3DXVECTOR3 acceleration, string ID);
 	void setAABB(D3DXVECTOR3 min, D3DXVECTOR3 max);
 	void setAABB(D3DXVECTOR3 min, D3DXVECTOR3 max, bool useContinuousCollisionDetection);
 	void setAABB(D3DXVECTOR3 min, D3DXVECTOR3 max, string ID);
-	void setAABB(D3DXVECTOR3 min, D3DXVECTOR3 max, string ID, bool useContinuousCollisionDetection);
-	D3DXVECTOR3 getAccel();
-	void setVel(D3DXVECTOR3 velocity);
-	D3DXVECTOR3 getVel();
+	void setAABB(D3DXVECTOR3 minPoint, D3DXVECTOR3 maxPoint, bool useCCD, string ID);
+	D3DXVECTOR3 getAccel(string ID);
+	void setVel(D3DXVECTOR3 Vel, string ID);
+	D3DXVECTOR3 getVel(string ID);
 
 private:
-	PhysicsCore core;
+	PhysicsCore Core;
 	PhysicsCollision collide;
 	float timeUntilUpdate;
 };
