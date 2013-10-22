@@ -43,6 +43,9 @@ public:
 	bool					SpaceBar();
 	bool					LBUTTONPressed();
 	bool					RBUTTONPressed();
+	bool					OnePressed();
+	bool					TwoPressed();
+	bool					ThreePressed();
 
 							//Keyhold Checks
 
@@ -88,7 +91,7 @@ private:
 	LPDIRECTINPUTDEVICE8	m_pDIMouseDevice;
 
 	char					KeyBuffer[256];
-	bool					KeyWasDown[5];
+	bool					KeyWasDown[10];
 	bool					ButtonWasDown[2];
 	
 	//cursor texture

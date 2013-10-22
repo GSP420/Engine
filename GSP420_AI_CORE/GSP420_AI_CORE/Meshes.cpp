@@ -1,4 +1,3 @@
-
 #include "Meshes.h"
 
 
@@ -9,7 +8,7 @@ void Meshes::load_meshes(LPCSTR pFilename, LPDIRECT3DDEVICE9 pD3DDevice)
 
 	D3DXLoadMeshFromX(pFilename, D3DXMESH_MANAGED, pD3DDevice, &buff_Adjacency, &buff_Material, NULL, &numMaterials, &Model); 
 
-
+	/*
 	D3DXMATERIAL* tempMaterials = (D3DXMATERIAL*)buff_Material->GetBufferPointer();
 
 
@@ -24,7 +23,7 @@ void Meshes::load_meshes(LPCSTR pFilename, LPDIRECT3DDEVICE9 pD3DDevice)
 		if(FAILED(D3DXCreateTextureFromFileA(pD3DDevice,tempMaterials[i].pTextureFilename,&texture[i])))
 			texture[i] = NULL; 
 	}
-
+	*/
 
 	return;
 }
@@ -62,13 +61,13 @@ void Meshes::draw_meshes(LPDIRECT3DDEVICE9 pD3DDevice)
 	pD3DDevice->SetTransform(D3DTS_WORLD, &(matRotate* matScale * matTranslate));
 
 
-	for(DWORD i = 0; i < numMaterials; i++) 
-	{
-		pD3DDevice->SetMaterial(&material[i]);
-		pD3DDevice->SetTexture(0,texture[i]);
-		Model->DrawSubset(i);
+	//for(DWORD i = 0; i < numMaterials; i++) 
+	//{
+		//pD3DDevice->SetMaterial(&material[i]);
+		//pD3DDevice->SetTexture(0,texture[i]);
+		Model->DrawSubset(0);
 		//return;
-	}
+	//}
 }
 
 void Meshes::clear_meshes()

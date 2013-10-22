@@ -20,10 +20,10 @@ void AISystem::AI_Update()
 	}
 }
 
-void AISystem::registerAgent(GenericEnemy agent, Behavior* behavior)
+void AISystem::registerAgent(GenericEnemy agent/*, Behavior* behavior*/)
 {	// add a new agent to the AI system
 	agent.self->setAgentId(id++);
-	agents[id] = behavior;
+	//agents[id] = behavior;
 }
 
 void AISystem::unregisterAgent(GenericEnemy agent)

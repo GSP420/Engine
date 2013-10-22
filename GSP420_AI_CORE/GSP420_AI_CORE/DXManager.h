@@ -13,11 +13,11 @@
 class DXManager
 {
 private:
+	
+public:
 	IDirect3D9* pD3DObject;
 	IDirect3DDevice9* pD3DDevice;
 	D3DPRESENT_PARAMETERS d3dpp;
-public:
-	
 
 	DXManager();
 	~DXManager();

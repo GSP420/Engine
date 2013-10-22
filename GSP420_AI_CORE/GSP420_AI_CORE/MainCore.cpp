@@ -13,7 +13,7 @@ void MainCore::Startup(HWND hWnd, int width, int height, bool windowed)
 	this->messageManager = new MessageManager();
 	this->entityManager = new EntityManager();
 	this->clock = new Clock();
-
+	this->clock->StartUpdate();
 	// init cores
 	this->AIManager = new AISystem();
 
@@ -45,7 +45,7 @@ void MainCore::Update(Entity* enemy, int gameState)
 	this->entityManager->Update();
 	this->messageManager->Update();
 
-	this->clock->StartUpdate();
+	
 	// update cores
 	
 	float dt = this->clock->GetElapsed();
@@ -61,9 +61,9 @@ void MainCore::Update(Entity* enemy, int gameState)
 		temp2 = this->PhysicsManager->getVel();
 		enemy->agentData.setAcceleration(temp2);
 		enemy->agentData.setPosition(temp + temp2);
-		this->PhysicsManager->Update(dt);
+		//this->PhysicsManager->Update(dt);
 	}
-
+	this->InputManager->Update();
 	this->ScriptManager->Update();
 	this->clock->EndUpdate();
 	this->clock->EndUpdate();

@@ -8,7 +8,7 @@ struct GameObject {
 
 	Meshes m_mesh;
 	D3DMATERIAL9* m_material;
-	char* m_name;
+	LPCSTR m_name;
 
 	GameObject (ID3DXMesh* _mesh, D3DMATERIAL9* _mat, char* _name);
 };
@@ -36,7 +36,7 @@ public:
 	LightClass* light;
 
 
-	void loadMesh(LPCSTR name);
+	void loadMesh(const std::string& name);
 	void setMeshes(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 scale);
 	//void drawMesh();
 	void clearMesh();
