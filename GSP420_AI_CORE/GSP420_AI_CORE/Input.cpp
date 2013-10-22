@@ -284,6 +284,57 @@ bool Input::SpaceBar()
 
 	return false;
 }
+
+bool Input::OnePressed()
+{
+	if (KEYDOWN(KeyBuffer, DIK_1))
+	{
+		KeyWasDown[5] = true;
+		return false;
+	}
+
+	if (!KEYDOWN(KeyBuffer, DIK_1) && KeyWasDown[5])
+	{
+		KeyWasDown[5] = false;
+		return true;
+	}
+
+	return false;
+}
+
+bool Input::TwoPressed()
+{
+	if (KEYDOWN(KeyBuffer, DIK_2))
+	{
+		KeyWasDown[6] = true;
+		return false;
+	}
+
+	if (!KEYDOWN(KeyBuffer, DIK_2) && KeyWasDown[6])
+	{
+		KeyWasDown[6] = false;
+		return true;
+	}
+
+	return false;
+}
+
+bool Input::ThreePressed()
+{
+	if (KEYDOWN(KeyBuffer, DIK_3))
+	{
+		KeyWasDown[7] = true;
+		return false;
+	}
+
+	if (!KEYDOWN(KeyBuffer, DIK_3) && KeyWasDown[7])
+	{
+		KeyWasDown[7] = false;
+		return true;
+	}
+
+	return false;
+}
 #pragma endregion KeyInput
 
 /*

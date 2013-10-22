@@ -188,9 +188,6 @@
     <ClCompile Include="Material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Meshes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Message.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -243,6 +240,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AISystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Meshes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
