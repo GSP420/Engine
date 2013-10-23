@@ -41,6 +41,7 @@ public:
 	bool					SPressed();
 	bool					DPressed();
 	bool					SpaceBar();
+	bool					EscPressed();
 	bool					LBUTTONPressed();
 	bool					RBUTTONPressed();
 	bool					OnePressed();
