@@ -296,7 +296,7 @@ void Octree::moveBoxes(vector<AABB*> &boxes, Octree* octree, float dt)
 	{
 		AABB* aabb = boxes[i];
 		D3DXVECTOR3 oldPos = aabb->extent();
-		aabb->extent() += core.velocity * dt;
+		aabb->extent() += aabb->velocity;
 		octree->boundingBoxMoved(aabb, oldPos);
 	}
 }

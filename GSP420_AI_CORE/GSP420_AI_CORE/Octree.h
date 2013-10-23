@@ -9,9 +9,7 @@
 
 #pragma once
 
-#include "PhysicsCore.h"
-#include <set>
-#include <vector>
+#include "PhysicsUtils.h"
 
 struct AABBPair
 {
@@ -30,8 +28,6 @@ private:
 	D3DXVECTOR3 corner1;
 	D3DXVECTOR3 corner2;
 	D3DXVECTOR3 center;
-
-	PhysicsCore core;
 
 	Octree *children[2][2][2];				//3 dimensional array for the nodes of the octree
 	bool hasChildren;						//boolean indicating if there are children or not

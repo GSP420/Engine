@@ -2,9 +2,20 @@
 
 const float PhysicsCore::GRAVITY = -9.8f;
 const float PhysicsCore::FRICTION = 0.5f;
+const D3DXVECTOR3 max_Velocity = D3DXVECTOR3(5.0f, 5.0f, 0.0f);
+const D3DXVECTOR3 max_Acceleration = D3DXVECTOR3(15.0f, 15.0f, 0.0f);
+
+Octree* _octree = 0;
+PhysicsCore* core = 0;
 
 PhysicsCore::PhysicsCore(void)
 {
+	cur_Acceleration = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	cur_Velocity = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	new_Velocity = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	_collisionInfo = new collisionInfo;
+	_collisions = new collisions;
+	_rayCastContact = new RayCastContact;
 }
 
 
@@ -22,27 +33,47 @@ void PhysicsCore::Accelerate(float delta_Time)
 	*	Determines the new velocity by adding the current
 	*	velocity to current acceleration*delta time
 	******************************************************/
-	D3DXVECTOR3 max_Velocity = D3DXVECTOR3(5.0f, 5.0f, 5.0f);
-	D3DXVECTOR3 max_Acceleration = D3DXVECTOR3(15.0f, 15.0f, 15.0f);
-	D3DXVECTOR3 cur_Acceleration;
-	D3DXVECTOR3 cur_Velocity;
-	D3DXVECTOR3 new_Velocity;
+	for(unsigned int i = 0; i < accelerations.size(); i++)
+	{	
+		cur_Acceleration = accelerations[i];
 	
-	cur_Acceleration = GetAcceleration();
-	cur_Velocity = GetVelocity();
-	new_Velocity += cur_Acceleration * delta_Time;
-	new_Velocity.x *= float(FRICTION);
+		if(cur_Acceleration.x > max_Acceleration.x)
+			cur_Acceleration.x = max_Acceleration.x;
+		if(cur_Acceleration.y > max_Acceleration.y)
+			cur_Acceleration.y = max_Acceleration.y;
+		if(cur_Acceleration.z > max_Acceleration.z)
+			cur_Acceleration.z = max_Acceleration.z;
+		if(cur_Acceleration.x < -max_Acceleration.x)
+		cur_Acceleration.x = -max_Acceleration.x;
+		if(cur_Acceleration.y < -max_Acceleration.y)
+			cur_Acceleration.y = -max_Acceleration.y;
+		if(cur_Acceleration.z < -max_Acceleration.z)
+			cur_Acceleration.z = -max_Acceleration.z;
 
-	if(new_Velocity > max_Velocity)
-		new_Velocity = max_Velocity;
-	if(new_Velocity < -max_Velocity)
-		new_Velocity = -max_Velocity;
-	if(cur_Acceleration > -max_Acceleration)
-		cur_Acceleration = max_Acceleration;
-	if(cur_Acceleration < max_Acceleration)
-		cur_Acceleration = -max_Acceleration;
+		//if(cur_Acceleration.y <= max_Velocity.y || velocities[i].y != cur_Acceleration.y)
+			//velocities[i].y = cur_Acceleration.y * delta_Time;
 
-	SetVelocity(new_Velocity);
+		cur_Velocity = velocities[i];
+		new_Velocity += cur_Acceleration * delta_Time;
+		new_Velocity.x *= float(FRICTION);
+
+		if(new_Velocity.x > max_Velocity.x)
+			new_Velocity.x = max_Velocity.x;
+		if(new_Velocity.y > max_Velocity.y)
+			new_Velocity.y = max_Velocity.y;
+		if(new_Velocity.z > max_Velocity.z)
+			new_Velocity.z = max_Velocity.z;
+		if(new_Velocity.x < -max_Velocity.x)
+			new_Velocity.x = -max_Velocity.x;
+		if(new_Velocity.y < -max_Velocity.y)
+			new_Velocity.y = -max_Velocity.y;
+		if(new_Velocity.z < -max_Velocity.z)
+			new_Velocity.z = -max_Velocity.z;
+
+		velocities[i] = new_Velocity;
+
+		boxes[i]->velocity = velocities[i];
+	}
 }
 
 
@@ -449,27 +480,75 @@ bool PhysicsCore::RayCast(D3DXVECTOR2 startPoint, D3DXVECTOR2 directionVector, l
 }
 
 
-D3DXVECTOR3 PhysicsCore::GetVelocity()
+D3DXVECTOR3 PhysicsCore::GetVelocity(string ID)
 {
-  return velocity;
+	D3DXVECTOR3 Velocity;
+
+	int i = 0;
+	while( i < velocities.size())
+	{
+		if(ID == boxes[i]->ID)
+		{
+			Velocity = velocities[i];
+			break;
+		}
+		else 
+			i++;
+	}
+
+	return Velocity;
 }
 
 
-void PhysicsCore::SetVelocity(D3DXVECTOR3 Vel)
+void PhysicsCore::SetVelocity(D3DXVECTOR3 Vel, string ID)
 {
-  velocity = Vel;
+	int i = 0;
+	while( i < velocities.size())
+	{
+		if(ID == boxes[i]->ID)
+		{
+			velocities[i] = Vel;
+			break;
+		}
+		else 
+			i++;
+	}
 }
 
 
-D3DXVECTOR3 PhysicsCore::GetAcceleration()
+D3DXVECTOR3 PhysicsCore::GetAcceleration(string ID)
 {
-  return acceleration;
+	D3DXVECTOR3 Accel;
+
+	int i = 0;
+	while( i < accelerations.size())
+	{
+		if(ID == boxes[i]->ID)
+		{
+			Accel = accelerations[i];
+			break;
+		}
+		else 
+			i++;
+	}
+
+	return Accel;
 }
 
 
-void PhysicsCore::SetAcceleration(D3DXVECTOR3 Accel)
+void PhysicsCore::SetAcceleration(D3DXVECTOR3 Accel, string ID)
 {
-  acceleration = Accel;
+	int i = 0;
+	while( i < accelerations.size())
+	{
+		if(ID == boxes[i]->ID)
+		{
+			accelerations[i] = Accel;
+			break;
+		}
+		else 
+			i++;
+	}
 }
 
 
@@ -516,6 +595,12 @@ void PhysicsCore::SetAABB(D3DXVECTOR3 minPoint, D3DXVECTOR3 maxPoint, bool useCC
 	aabb->maxPoint = maxPoint;
 	aabb->useContinuousDetection = useCCD;
 	aabb->ID = ID;
+		
+	velocities.push_back(D3DXVECTOR3(0,0,0));
+	accelerations.push_back(D3DXVECTOR3());
 
 	boxes.push_back(aabb);
+
+	_octree->add(aabb);
 }
+

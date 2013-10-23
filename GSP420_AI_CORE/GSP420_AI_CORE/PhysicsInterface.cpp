@@ -11,50 +11,37 @@ PhysicsInterface::~PhysicsInterface(){
 
 void PhysicsInterface::Startup(float SceneSize)
 {
-	core.velocity = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	core.acceleration = D3DXVECTOR3(0.0f, float(core.GRAVITY), 0.0f);
+	core = &Core;
+	//core->velocity = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	//core->acceleration = D3DXVECTOR3(0.0f, core->GRAVITY, 0.0f);
 	timeUntilUpdate = 0.0f;
 
-	collide._octree = new Octree(D3DXVECTOR3(-SceneSize / 2, -SceneSize / 2, SceneSize / 2),
+	_octree = new Octree(D3DXVECTOR3(-SceneSize / 2, -SceneSize / 2, SceneSize / 2),
 						D3DXVECTOR3(SceneSize / 2, SceneSize / 2, SceneSize / 2),
-						1.0f);
+						1);
 }
 
 void PhysicsInterface::Update(float dt)
 {
 	float TOI;
-	core.Accelerate(dt);
-	collide._octree->advance(core.boxes, collide._octree, dt, timeUntilUpdate);
+	core->Accelerate(dt);
+	_octree->advance(core->boxes, _octree, dt, timeUntilUpdate);
 
-	//Loop through the boxes for broad phase
-	for(int i = 0; i < core.boxes.size(); i++)
+	//Loop through the boxes to change position and check collision
+	for(unsigned int i = 0; i < core->boxes.size(); i++)
 	{
-		//Broad phase collision detection
-		if(collide.CollisionDetection(core.boxes, collide._octree, true))
+		core->boxes[i]->minPoint += core->boxes[i]->velocity;
+		core->boxes[i]->maxPoint += core->boxes[i]->velocity;
+
+		//Narrow phase collision detection
+		if(core->boxes[i]->useContinuousDetection)
 		{
-			//this box collided with another box
+			//box has continuous detection toggled on, so determine if we've already found a collision for it in broad phase
+			collide.sweptCCD(i, core->boxes, _octree, TOI);
 		}
 		else
 		{
-			//this box didnt collide with anything
-		}
-	}
-
-	//Loop through the boxes a second time for narrow phase
-	for(int i = 0; i < core.boxes.size(); i++)
-	{
-		//Narrow phase collision detection
-		if(core.boxes[i]->useContinuousDetection)
-		{
-			//box has continuous detection toggled on, so determine if we've already found a collision for it in broad phase
-			if(collide.sweptCCD(core.boxes, collide._octree, TOI))
-			{
-				//this box collided with another box
-			}
-			else
-			{
-				//this box didnt collide with anything
-			}
+			collide.CollisionDetection(core->boxes, _octree, false);
 		}
 	}
 
@@ -64,65 +51,65 @@ void PhysicsInterface::Update(float dt)
 
 void PhysicsInterface::Shutdown()
 {
-	for(unsigned int i = 0; i < core.boxes.size(); i++)
-		delete core.boxes[i];
+	for(unsigned int i = 0; i < core->boxes.size(); i++)
+		delete core->boxes[i];
 
-	 delete collide._octree;
+	 delete _octree;
 }
 
 bool PhysicsInterface::RayCast3D(D3DXVECTOR3 startPoint, D3DXVECTOR3 directionVector, list<AABB> collidables, int maxTestLimit, RayCastContact &contactOutput)
 {
-	return core.RayCast(startPoint, directionVector, collidables, maxTestLimit, contactOutput);
+	return core->RayCast(startPoint, directionVector, collidables, maxTestLimit, contactOutput);
 }
 
 bool PhysicsInterface::RayCast2D(D3DXVECTOR2 startPoint, D3DXVECTOR2 directionVector, list<AABB> collidables, int maxTestLimit, RayCastContact &contactOutput)
 {
-	return core.RayCast(startPoint, directionVector, collidables, maxTestLimit, contactOutput);
+	return core->RayCast(startPoint, directionVector, collidables, maxTestLimit, contactOutput);
 }
 
-void PhysicsInterface::setAccel(D3DXVECTOR3 acceleration)
+void PhysicsInterface::setAccel(D3DXVECTOR3 acceleration, string ID)
 {
-	core.SetAcceleration(acceleration);
-}
-
-
-D3DXVECTOR3 PhysicsInterface::getAccel()
-{
-	return core.GetAcceleration();
+	core->SetAcceleration(acceleration, ID);
 }
 
 
-void PhysicsInterface::setVel(D3DXVECTOR3 velocity)
+D3DXVECTOR3 PhysicsInterface::getAccel(string ID)
 {
-	core.SetVelocity(velocity);
+	return core->GetAcceleration(ID);
 }
 
 
-D3DXVECTOR3 PhysicsInterface::getVel()
+void PhysicsInterface::setVel(D3DXVECTOR3 Vel, string ID)
 {
-	return core.velocity;
+	core->SetVelocity(Vel, ID);
+}
+
+
+D3DXVECTOR3 PhysicsInterface::getVel(string ID)
+{
+	return core->GetVelocity(ID);
 }
 
 
 void PhysicsInterface::setAABB(D3DXVECTOR3 minPoint, D3DXVECTOR3 maxPoint)
 {
-	core.SetAABB(minPoint, maxPoint);	
+	core->SetAABB(minPoint, maxPoint);	
 }
 
 
 void PhysicsInterface::setAABB(D3DXVECTOR3 minPoint, D3DXVECTOR3 maxPoint, bool useCCD)
 {
-	core.SetAABB(minPoint, maxPoint, useCCD);	
+	core->SetAABB(minPoint, maxPoint, useCCD);	
 }
 
 
 void PhysicsInterface::setAABB(D3DXVECTOR3 minPoint, D3DXVECTOR3 maxPoint, string ID)
 {
-	core.SetAABB(minPoint, maxPoint, ID);	
+	core->SetAABB(minPoint, maxPoint, ID);	
 }
 
 
-void PhysicsInterface::setAABB(D3DXVECTOR3 minPoint, D3DXVECTOR3 maxPoint, string ID, bool useCCD)
-{
-	core.SetAABB(minPoint, maxPoint, useCCD, ID);	
+void PhysicsInterface::setAABB(D3DXVECTOR3 minPoint, D3DXVECTOR3 maxPoint, bool useCCD, string ID)
+{	
+	core->SetAABB(minPoint, maxPoint, useCCD, ID);	
 }
