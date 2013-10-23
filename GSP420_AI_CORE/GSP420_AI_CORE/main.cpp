@@ -280,9 +280,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 					player->agentData.getPosition(temp);
 					player->agentData.getAcceleration(temp2);
 					temp2[0] -= 5.0f;
-					physics_core->setAccel(temp2);
+					physics_core->setAccel(temp2, "player");
 					D3DXVECTOR3 vec;
-					vec = physics_core->getVel();
+					vec = physics_core->getVel("player");
 					player->agentData.setAcceleration(temp2);
 					temp[0] += vec.x;
 					temp[1] += vec.y;
@@ -294,9 +294,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 					player->agentData.getPosition(temp);
 					player->agentData.getAcceleration(temp2);
 					temp2[0] += 5.0f;
-					physics_core->setAccel(temp2);
+					physics_core->setAccel(temp2, "player");
 					D3DXVECTOR3 vec;
-					vec = physics_core->getVel();
+					vec = physics_core->getVel("player");
 					player->agentData.setAcceleration(temp2);
 					temp[0] += vec.x;
 					temp[1] += vec.y;
@@ -311,9 +311,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 						player->agentData.getPosition(temp);
 						player->agentData.getAcceleration(temp2);
 						temp2[1] += 15.0f;
-						physics_core->setAccel(temp2);
+						physics_core->setAccel(temp2, "player");
 						D3DXVECTOR3 vec;
-						vec = physics_core->getVel();
+						vec = physics_core->getVel("player");
 						player->agentData.setAcceleration(temp2);
 						temp[0] += vec.x;
 						temp[1] += vec.y;
