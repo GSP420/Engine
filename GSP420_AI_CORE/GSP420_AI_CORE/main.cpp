@@ -190,14 +190,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	platform = new Entity;
 	platform->SetEntity("platform", "platform");
 	//REPLACE 0'S WITH POSITION VALUES
-	pos[0] = 8, pos[1] = 0, pos[2] = 10; //THIS WILL MOST LIKELY BE REMOVED AS MULTIPLE PLATFORMS NEED DIFFERENT POSITION AND ROTATION VALUES, DO BEFORE RENDERING WHEN CREATEING MULTIPLES OF THIS MESH
+	pos[0] = 0, pos[1] = 8, pos[2] = 10; //THIS WILL MOST LIKELY BE REMOVED AS MULTIPLE PLATFORMS NEED DIFFERENT POSITION AND ROTATION VALUES, DO BEFORE RENDERING WHEN CREATEING MULTIPLES OF THIS MESH
 	platform->agentData.setPosition(pos);
 	platform->agentData.setRotation(rot);
 	physics_core->setAABB(D3DXVECTOR3(/*FILL IN*/), D3DXVECTOR3(/*FILL IN*/), "platform");
 	
 	//load the mesh model to use
 	Meshes cube;
-	cube.load_meshes("cube.X", pD3DDevice);
+	cube.load_meshes("dwarf.x", pD3DDevice);
 	//cube.set_meshes(pos, rot, scale);
 	//camera setup
 	//DO SOMETHING HERE
@@ -273,7 +273,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				//DO SOMETHING HERE
 				
 				pD3DDevice->BeginScene();
-				pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(122, 0, 0) , 1.0f, 0);
+				pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0) , 1.0f, 0);
 				
 				GetClientRect(hWnd, &rect);
 				sprintf(str, "Engine Demo");
@@ -290,8 +290,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				pD3DDevice->EndScene();
 				pD3DDevice->Present(0, 0, 0, 0);
 				main_core->Update(enemy, gameState);
-
-				if(input_core->EscPressed()) gameState = 2;
 
 				if(input_core->OnePressed())
 				{
@@ -379,13 +377,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				{
 					pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 				}
-				pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(122, 0, 0) , 1.0f, 0);
+				pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0) , 1.0f, 0);
 				camera.dxSetProjection(pD3DDevice);
 				camera.dxSetView(pD3DDevice);
 				pD3DDevice->BeginScene();
 
 				platform->agentData.getPosition(pos);
-				cube.set_meshes(pos, rot, scale);
+				cube.pos.z = 30.0f;
+				cube.pos.y = 8.0f;
+				//cube.set_meshes(pos, rot, scale);
 				cube.draw_meshes(pD3DDevice);
 
 				GetClientRect(hWnd, &rect);
@@ -427,22 +427,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				pD3DDevice->Present(0, 0, 0, 0);
 				main_core->Update(enemy, gameState);
 
-				if(input_core->EscPressed()) gameState = 2;
-
-				if(input_core->OnePressed())
-				{
-					gameState = 2;
-				}
-
-				if(input_core->TwoPressed())
-				{
-					gameState = 3;
-				}
-
-				if(input_core->ThreePressed())
-				{
-					gameState = 4;
-				}
+				if(input_core->EscPressed()) gameState = 1;
 
 				break;
 			case (4):	//shutdown application
