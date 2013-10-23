@@ -15,7 +15,39 @@ bool Wireframe = false;
 float yAngle = 0;
 int NumVertices = 6;
 const int NumMeshes = 1;
+const int AUTHORS = 29;
 void Init(int widht, int height);
+
+char* authors[AUTHORS] = {
+						"Alex Larioza",
+						"Alexander Hunsiker",
+						"Andrew Ebert",
+						"Antwan Wynn",
+						"Brandon Manuel",
+						"Christopher Cone",
+						"Cody Bennett",
+						"Darion Wallace",
+						"David Emerson",
+						"Eric Bailey",
+						"Erick Garcia",
+						"Gregory Flierl",
+						"John Berg",
+						"John Bohlier",
+						"Jordan Swanson",
+						"Josh Goldsmith",
+						"Joshua Archer",
+						"Joshua Murrill",
+						"Justin Porras",
+						"Latisha Harris",
+						"Mark Kirol",
+						"Michael Sanders",
+						"Michael Young",
+						"Miguel Testa",
+						"Nathanael Blanchard",
+						"Sean Palmer",
+						"Stephen Roebuck",
+						"Zachary Gauld",
+					};
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -179,7 +211,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
                   DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY,
                   DEFAULT_PITCH | FF_DONTCARE, TEXT("Times New Roman"), 
                   &pFont);
-	gText.Init(18, pD3DDevice);
+	gText.Init(22, pD3DDevice);
 
 	//light setup
 	//DO SOMETHING HERE
@@ -241,6 +273,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				//DO SOMETHING HERE
 				
 				pD3DDevice->BeginScene();
+				pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(122, 0, 0) , 1.0f, 0);
+				
 				GetClientRect(hWnd, &rect);
 				sprintf(str, "Engine Demo");
 				pFont->DrawText(NULL, str, -1, &rect,
@@ -369,7 +403,47 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				//setup credits with UI and Graphics
 				//loop till gameState changes
 				//update
-				main_core->Update(enemy, gameState);			
+				pD3DDevice->BeginScene();
+				pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(122, 0, 0) , 1.0f, 0);
+				
+				GetClientRect(hWnd, &rect);
+
+				pFont->DrawText(NULL, str, -1, &rect,
+						DT_TOP | DT_CENTER | DT_NOCLIP , D3DCOLOR_ARGB(255, 
+						255, 
+						255, 
+						255			
+						));
+
+				gText.DisplayText("CREDITS:", width / 2, 35, 50, 25, WHITE);
+
+				for (int i = 0; i < AUTHORS; i++)
+				{
+					gText.DisplayText(authors[i], width / 2, i * 25 + 60, 100, 10, WHITE);
+				}
+
+				
+				pD3DDevice->EndScene();
+				pD3DDevice->Present(0, 0, 0, 0);
+				main_core->Update(enemy, gameState);
+
+				if(input_core->EscPressed()) gameState = 2;
+
+				if(input_core->OnePressed())
+				{
+					gameState = 2;
+				}
+
+				if(input_core->TwoPressed())
+				{
+					gameState = 3;
+				}
+
+				if(input_core->ThreePressed())
+				{
+					gameState = 4;
+				}
+
 				break;
 			case (4):	//shutdown application
 				//shutdown
