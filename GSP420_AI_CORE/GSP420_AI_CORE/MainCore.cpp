@@ -52,6 +52,7 @@ void MainCore::Update(Entity* enemy, int gameState)
 	if(gameState == 2)
 	{
 		this->AIManager->AI_Update();
+		/*
 		//from AI update and use physics for further calculations
 		enemy->agentData.getPosition(temp);
 		enemy->agentData.getAcceleration(temp2);
@@ -62,6 +63,7 @@ void MainCore::Update(Entity* enemy, int gameState)
 		enemy->agentData.setAcceleration(temp2);
 		enemy->agentData.setPosition(temp + temp2);
 		//this->PhysicsManager->Update(dt);
+		*/
 	}
 	this->InputManager->Update();
 	this->ScriptManager->Update();

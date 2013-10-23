@@ -65,7 +65,7 @@ void Meshes::draw_meshes(LPDIRECT3DDEVICE9 pD3DDevice)
 	{
 		pD3DDevice->SetMaterial(&material[i]);
 		pD3DDevice->SetTexture(0,texture[i]);
-		Model->DrawSubset(0);
+		Model->DrawSubset(i);
 		//return;
 	}
 }

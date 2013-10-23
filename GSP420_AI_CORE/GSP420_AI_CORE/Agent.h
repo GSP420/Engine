@@ -13,6 +13,7 @@ class Agent
 		float	destination[3];
 		int		agentId;
 		float	acceleration[3];
+		float	scale[3];
 	public:
 		Agent();
 		void getRotation(float[3]);
@@ -27,4 +28,6 @@ class Agent
 		void setAcceleration(float[3]);
 		void setAgentId(int);
 		void getAgentId(int);
+		void setScale(float[3]);
+		void getScale(float[3]);
 };
