@@ -100,3 +100,17 @@ void Agent::setAcceleration(float accel[3])
 	acceleration[1] = accel[1];
 	acceleration[2] = accel[2];
 }
+
+void Agent::setScale(float source[3])
+{
+	scale[0] = source[0];
+	scale[0] = source[0];
+	scale[0] = source[0];
+}
+
+void Agent::getScale(float source[3])
+{
+	source[0] = scale[0];
+	source[0] = scale[0];
+	source[0] = scale[0];
+}

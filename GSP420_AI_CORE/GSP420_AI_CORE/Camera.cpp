@@ -14,8 +14,8 @@ Camera::~Camera()
 
 void Camera::Init()
 {
-		pos = D3DXVECTOR3(0, 10, 0);
-		look = D3DXVECTOR3(0, 10, 1);
+		pos = D3DXVECTOR3(0, 25, -50);
+		look = D3DXVECTOR3(0, 5, 0);
 		up = D3DXVECTOR3(0, 1, 0);
 
 		fov = 50;

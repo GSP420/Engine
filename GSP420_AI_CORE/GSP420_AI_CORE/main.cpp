@@ -30,7 +30,6 @@ char* authors[AUTHORS] = {
 						"David Emerson",
 						"Eric Bailey",
 						"Erick Garcia",
-						"Gregory Flierl",
 						"John Berg",
 						"John Bohlier",
 						"Jordan Swanson",
@@ -156,7 +155,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	{
 		pos[i] = 0;
 		rot[i] = 0;
-		scale[i] = 1;
+		scale[i] = .1;
 	}
 
 	//setup for player
@@ -165,23 +164,28 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	player = new Entity;
 	player->SetEntity("player", "player");
 	//REPLACE 0'S WITH POSITION VALUES
-	pos[0] = 0, pos[1] = 0, pos[2] = 0;
+	pos[0] = -3, pos[1] = 2.5, pos[2] = 20;
+	scale[0] = .1, scale[1] = .1, scale[2] = .1; 
 	player->agentData.setPosition(pos);
 	player->agentData.setRotation(rot);
+	player->agentData.setScale(scale);
 	physics_core->setAABB(D3DXVECTOR3(/*FILL IN*/), D3DXVECTOR3(/*FILL IN*/), "player");
 	ai_core->regeisterPlayer(&player->agentData);
 
 	//setup for enemy
 	//DO SOMETHING HERE
+	Behavior* wtf = "wtf";
 	Entity* enemy;
 	enemy = new Entity;
 	enemy->SetEntity("enemy", "basic");
 	//REPLACE 0'S WITH POSITION VALUES
-	pos[0] = 8, pos[1] = 0, pos[2] = 10;
+	pos[0] = -3, pos[1] = 2.5, pos[2] = 20;
+	scale[0] = .1, scale[1] = .1, scale[2] = .1; 
 	enemy->agentData.setPosition(pos);
 	enemy->agentData.setRotation(rot);
+	enemy->agentData.setScale(scale);
 	physics_core->setAABB(D3DXVECTOR3(/*FILL IN*/), D3DXVECTOR3(/*FILL IN*/), "enemy");
-	ai_core->registerAgent(GenericEnemy(&enemy->agentData)/*, 0*/); //look at removing the 0 here for a behavior isnt needed as AI sits, it automatically cycles through all states of an enemy already
+	ai_core->registerAgent(GenericEnemy(&enemy->agentData), ); //look at removing the 0 here for a behavior isnt needed as AI sits, it automatically cycles through all states of an enemy already
 			
 			
 	//setup for platforms
@@ -190,9 +194,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	platform = new Entity;
 	platform->SetEntity("platform", "platform");
 	//REPLACE 0'S WITH POSITION VALUES
-	pos[0] = 8, pos[1] = 0, pos[2] = 10; //THIS WILL MOST LIKELY BE REMOVED AS MULTIPLE PLATFORMS NEED DIFFERENT POSITION AND ROTATION VALUES, DO BEFORE RENDERING WHEN CREATEING MULTIPLES OF THIS MESH
+	pos[0] = 0, pos[1] = 0, pos[2] = 20; //THIS WILL MOST LIKELY BE REMOVED AS MULTIPLE PLATFORMS NEED DIFFERENT POSITION AND ROTATION VALUES, DO BEFORE RENDERING WHEN CREATEING MULTIPLES OF THIS MESH
+	scale[0] = 100, scale[1] = .01, scale[2] = .1; 
 	platform->agentData.setPosition(pos);
 	platform->agentData.setRotation(rot);
+	platform->agentData.setScale(scale);
 	physics_core->setAABB(D3DXVECTOR3(/*FILL IN*/), D3DXVECTOR3(/*FILL IN*/), "platform");
 	
 	//load the mesh model to use
@@ -273,7 +279,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				//DO SOMETHING HERE
 				
 				pD3DDevice->BeginScene();
-				pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(122, 0, 0) , 1.0f, 0);
+				pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0) , 1.0f, 0);
 				
 				GetClientRect(hWnd, &rect);
 				sprintf(str, "Engine Demo");
@@ -290,8 +296,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				pD3DDevice->EndScene();
 				pD3DDevice->Present(0, 0, 0, 0);
 				main_core->Update(enemy, gameState);
-
-				if(input_core->EscPressed()) gameState = 2;
 
 				if(input_core->OnePressed())
 				{
@@ -322,7 +326,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				{
 					player->agentData.getPosition(temp);
 					player->agentData.getAcceleration(temp2);
-					temp2[0] -= 5.0f;
+					temp[0] -= .2f;
+					player->agentData.setPosition(temp);
+					/*
+					temp2[0] -= .1f;
 					physics_core->setAccel(temp2, "player");
 					D3DXVECTOR3 vec;
 					vec = physics_core->getVel("player");
@@ -331,13 +338,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 					temp[1] += vec.y;
 					temp[2] += vec.z;
 					player->agentData.setPosition(temp);
+					*/
 				}
 
 				if(input_core->DPressed())
 				{
 					player->agentData.getPosition(temp);
 					player->agentData.getAcceleration(temp2);
-					temp2[0] += 5.0f;
+					temp[0] += .2f;
+					player->agentData.setPosition(temp);
+					/*
+					temp2[0] += .1f;
 					physics_core->setAccel(temp2, "player");
 					D3DXVECTOR3 vec;
 					vec = physics_core->getVel("player");
@@ -346,6 +357,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 					temp[1] += vec.y;
 					temp[2] += vec.z;
 					player->agentData.setPosition(temp);
+					*/
 				}
 
 				if(!jump)
@@ -355,7 +367,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 						jump = true;
 						player->agentData.getPosition(temp);
 						player->agentData.getAcceleration(temp2);
-						temp2[1] += 15.0f;
+						/*
+						temp2[1] += 1.0f;
 						physics_core->setAccel(temp2, "player");
 						D3DXVECTOR3 vec;
 						vec = physics_core->getVel("player");
@@ -364,13 +377,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 						temp[1] += vec.y;
 						temp[2] += vec.z;
 						player->agentData.setPosition(temp);
+						*/
 					}
 				}
 
 				//update
 				main_core->Update(enemy, gameState);
 
-
+				
 				if (Wireframe)
 				{
 					pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
@@ -379,12 +393,26 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				{
 					pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 				}
-				pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(122, 0, 0) , 1.0f, 0);
+				pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0) , 1.0f, 0);
 				camera.dxSetProjection(pD3DDevice);
 				camera.dxSetView(pD3DDevice);
 				pD3DDevice->BeginScene();
 
+				enemy->agentData.getPosition(pos);
+				enemy->agentData.getScale(scale);
+				enemy->agentData.getRotation(rot);
+				cube.set_meshes(pos, rot, scale);
+				cube.draw_meshes(pD3DDevice);
+
+				player->agentData.getPosition(pos);
+				player->agentData.getScale(scale);
+				player->agentData.getRotation(rot);
+				cube.set_meshes(pos, rot, scale);
+				cube.draw_meshes(pD3DDevice);
+
 				platform->agentData.getPosition(pos);
+				platform->agentData.getScale(scale);
+				platform->agentData.getRotation(rot);
 				cube.set_meshes(pos, rot, scale);
 				cube.draw_meshes(pD3DDevice);
 
@@ -427,22 +455,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				pD3DDevice->Present(0, 0, 0, 0);
 				main_core->Update(enemy, gameState);
 
-				if(input_core->EscPressed()) gameState = 2;
-
-				if(input_core->OnePressed())
-				{
-					gameState = 2;
-				}
-
-				if(input_core->TwoPressed())
-				{
-					gameState = 3;
-				}
-
-				if(input_core->ThreePressed())
-				{
-					gameState = 4;
-				}
+				if(input_core->EscPressed()) gameState = 1;
 
 				break;
 			case (4):	//shutdown application
