@@ -57,8 +57,8 @@ void MainCore::Update(Entity* enemy, int gameState)
 		enemy->agentData.getAcceleration(temp2);
 		enemy->agentData.getDestination(temp3);
 		temp2 += temp3; //check this for correctness
-		this->PhysicsManager->setAccel(temp2);
-		temp2 = this->PhysicsManager->getVel();
+		this->PhysicsManager->setAccel(temp2, "enemy");
+		temp2 = this->PhysicsManager->getVel("enemy");
 		enemy->agentData.setAcceleration(temp2);
 		enemy->agentData.setPosition(temp + temp2);
 		//this->PhysicsManager->Update(dt);
