@@ -256,18 +256,24 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				pD3DDevice->EndScene();
 				pD3DDevice->Present(0, 0, 0, 0);
 				main_core->Update(enemy, gameState);
+
+				if(input_core->EscPressed()) gameState = 2;
+
 				if(input_core->OnePressed())
 				{
 					gameState = 2;
 				}
+
 				if(input_core->TwoPressed())
 				{
 					gameState = 3;
 				}
+
 				if(input_core->ThreePressed())
 				{
 					gameState = 4;
 				}
+
 				break;
 			case (2)://game logic state
 				float temp[3];
@@ -275,6 +281,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				player->agentData.getPosition(temp);
 				if(temp[1] <= 101)
 					jump = false;
+
+				if(input_core->EscPressed()) gameState = 1;
+
 				if(input_core->APressed())
 				{
 					player->agentData.getPosition(temp);
@@ -289,6 +298,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 					temp[2] += vec.z;
 					player->agentData.setPosition(temp);
 				}
+
 				if(input_core->DPressed())
 				{
 					player->agentData.getPosition(temp);
@@ -303,6 +313,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 					temp[2] += vec.z;
 					player->agentData.setPosition(temp);
 				}
+
 				if(!jump)
 				{
 					if(input_core->SpaceBar())
@@ -321,6 +332,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 						player->agentData.setPosition(temp);
 					}
 				}
+
 				//update
 				main_core->Update(enemy, gameState);
 

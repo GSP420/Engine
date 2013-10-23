@@ -335,6 +335,23 @@ bool Input::ThreePressed()
 
 	return false;
 }
+
+bool Input::EscPressed()
+{
+	if (KEYDOWN(KeyBuffer, DIK_ESCAPE))
+	{
+		KeyWasDown[8] = true;
+		return false;
+	}
+
+	if (!KEYDOWN(KeyBuffer, DIK_ESCAPE) && KeyWasDown[8])
+	{
+		KeyWasDown[8] = false;
+		return true;
+	}
+
+	return false;
+}
 #pragma endregion KeyInput
 
 /*
