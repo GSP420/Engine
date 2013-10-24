@@ -36,7 +36,7 @@ void PhysicsCore::Accelerate(float delta_Time)
 	for(unsigned int i = 0; i < accelerations.size(); i++)
 	{	
 		cur_Acceleration = accelerations[i];
-	
+
 		if(cur_Acceleration.x > max_Acceleration.x)
 			cur_Acceleration.x = max_Acceleration.x;
 		if(cur_Acceleration.y > max_Acceleration.y)
@@ -49,9 +49,6 @@ void PhysicsCore::Accelerate(float delta_Time)
 			cur_Acceleration.y = -max_Acceleration.y;
 		if(cur_Acceleration.z < -max_Acceleration.z)
 			cur_Acceleration.z = -max_Acceleration.z;
-
-		//if(cur_Acceleration.y <= max_Velocity.y || velocities[i].y != cur_Acceleration.y)
-			//velocities[i].y = cur_Acceleration.y * delta_Time;
 
 		cur_Velocity = velocities[i];
 		new_Velocity += cur_Acceleration * delta_Time;

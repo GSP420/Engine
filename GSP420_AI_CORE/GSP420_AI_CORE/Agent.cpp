@@ -18,6 +18,10 @@ Agent::Agent()
 	destination[1] = 0;
 	destination[2] = 0;
 
+	acceleration[0] = 0;
+	acceleration[1] = 0;
+	acceleration[2] = 0;
+
 	agentId = 0;
 }
 
@@ -90,8 +94,8 @@ void Agent::getAgentId(int id)
 void Agent::getAcceleration(float accel[3])
 {
 	accel[0] = acceleration[0];
-	accel[0] = acceleration[0];
-	accel[0] = acceleration[0];
+	accel[1] = acceleration[1];
+	accel[2] = acceleration[2];
 }
 
 void Agent::setAcceleration(float accel[3])

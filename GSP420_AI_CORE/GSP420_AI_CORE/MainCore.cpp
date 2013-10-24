@@ -37,6 +37,7 @@ void MainCore::Startup(HWND hWnd, int width, int height, bool windowed)
 
 void MainCore::Update(Entity* enemy, int gameState)
 {
+	this->clock->StartUpdate();
 	D3DXVECTOR3 temp;
 	D3DXVECTOR3 temp2, temp3;
 	this->clock->UpdateElapsed();
@@ -52,7 +53,7 @@ void MainCore::Update(Entity* enemy, int gameState)
 	if(gameState == 2)
 	{
 		this->AIManager->AI_Update();
-		/*
+
 		//from AI update and use physics for further calculations
 		enemy->agentData.getPosition(temp);
 		enemy->agentData.getAcceleration(temp2);
@@ -62,8 +63,8 @@ void MainCore::Update(Entity* enemy, int gameState)
 		temp2 = this->PhysicsManager->getVel("enemy");
 		enemy->agentData.setAcceleration(temp2);
 		enemy->agentData.setPosition(temp + temp2);
-		//this->PhysicsManager->Update(dt);
-		*/
+		this->PhysicsManager->Update(dt);
+		
 	}
 	this->InputManager->Update();
 	this->ScriptManager->Update();
