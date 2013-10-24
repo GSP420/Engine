@@ -28,7 +28,7 @@ class AISystem
 	public:
 		AISystem();					// constructor
 		void AI_Update();					// called to update all agents
-		void registerAgent(GenericEnemy entity, Behavior*);	// register an agent with the AI system
-		void unregisterAgent(GenericEnemy entity);// remove an agent from the AI system
-		void regeisterPlayer(Agent* player);
+		void registerAgent(Agent*);	// register an agent with the AI system
+		void unregisterAgent(Agent*);// remove an agent from the AI system
+		void regeisterPlayer(Agent*);
 };
