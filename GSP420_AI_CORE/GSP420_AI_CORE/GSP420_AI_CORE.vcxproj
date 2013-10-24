@@ -17,8 +17,6 @@
     <ClInclude Include="Behavior.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Clock.h" />
-    <ClInclude Include="CoreManager.h" />
-    <ClInclude Include="DXManager.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Evade.h" />
@@ -61,8 +59,6 @@
     <ClCompile Include="AudioCore.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Clock.cpp" />
-    <ClCompile Include="CoreManager.cpp" />
-    <ClCompile Include="DXManager.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Evade.cpp" />

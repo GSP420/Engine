@@ -6,6 +6,8 @@
 #include <iostream>
 using namespace std;
 #include <string>
+#include "Scriptingcore.h"
+
 Script::~Script()
 {
 	lua_close(luaState);

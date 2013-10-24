@@ -17,7 +17,7 @@ class Script
 	public:
 		Script();
 		Script(std::string scriptfile);
-		virtual ~Script();
+		~Script();
 		
 		bool loadScript(std::string scriptfile);
 
@@ -32,6 +32,19 @@ class Script
 		
 		void runFunction(std::string name);
 
-		
-};
+		double sWidth; 
+		double sHeight; 
+		int sColor; 
+		bool sFScreen; 
 
+		//AUDIO CORE VARIABLES (sMusicVolume, sSoundVolume)
+		float sMusicVolume; 
+		float sSoundVolume; 
+	
+
+		//PHYSICS CORE VARIABLES (sGravity, sMaxVelocity, sMaxAcceleration)
+		int sGravity; 
+		int sMaxVelocity; 
+		int sMaxAcceleration; 
+
+};

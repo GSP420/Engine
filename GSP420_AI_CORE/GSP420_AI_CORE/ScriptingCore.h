@@ -1,12 +1,13 @@
 // *******************************
 // Interface Class - ScriptingCore
 // *******************************
+#pragma once
 #include <string>
 #include "Script.h"
-#pragma once
+#include <string>
+#include "lua.hpp"
+#pragma comment(lib, "lua5.1.lib")
 using namespace std;
-
-
 
 class ScriptingCore
 {
@@ -15,21 +16,38 @@ public:
 	~ScriptingCore();
 
 	void Startup();
-	void Update();
+	void Update(std::string);
 	void Shutdown();
+		
+	bool loadScript(std::string scriptfile);
 
-	Script *script;
-	
-private:
-	int width;		// SCREEN WIDTH
-	int height;		// SCREEN HEIGHT
+	std::string getGlobalString(std::string name);
+	void setGlobalString(std::string name, std::string value);
+		
+	double getGlobalNumber(std::string name);
+	void setGlobalNumber(std::string name, double value);
+		
+	bool getGlobalBoolean(std::string name);
+	void setGlobalBoolean(std::string name, bool value);
+		
+	void runFunction(std::string name);
+
+	Script *script; // Script class pointer to ScriptingCore object
+
+	double width;		// SCREEN WIDTH
+	double height;		// SCREEN HEIGHT
 	int color;		// COLORDEPTH
 	bool fscreen;	// FULLSCREEN
-	int musicVolume;	//MUSIC VOLUME
-	int soundVolume;	// SOUND VOLUME
+	float musicVolume;	//MUSIC VOLUME
+	float soundVolume;	// SOUND VOLUME
 	int gravity;	//GRAVITY
 	int maxAcceleration;	//MAXIMUM ACCELERATION
 	int maxVelocity; // MAXIMUM VELOCITY
+	
+private:
+	lua_State *luaState;
+
+	
 
 };
 

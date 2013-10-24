@@ -25,11 +25,11 @@ void Pursue::enact()
 	float updateTime = 1 / 20;													// need to figure out how many updates per second????????
 
 	// calculate the future position of target in 3D
-	for (int i = 0; i <3; i++)
-	{
-		if (targetFuturePosition[i] == selfCurrentPosition[i]) {targetFuturePosition[i] = targetCurrentPosition[i];}
-		else targetFuturePosition[i] = targetCurrentPosition[i] + targetVelocity[i] * updateTime;
-	}
+	//for (int i = 0; i < 1; i++)
+	//{
+		if (targetFuturePosition[0] == selfCurrentPosition[0]) {targetFuturePosition[0] = targetCurrentPosition[0];}
+		else targetFuturePosition[0] = targetCurrentPosition[0] + targetVelocity[0] * updateTime;
+	//}
 
 	Steering::Seek(self, targetFuturePosition);
 }

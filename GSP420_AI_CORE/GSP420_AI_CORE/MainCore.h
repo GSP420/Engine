@@ -8,7 +8,7 @@
 #include "PhysicsInterface.h"
 #include "Input.h"
 #include "UI.h"
-#include "CoreManager.h"
+
 
 
 
@@ -26,7 +26,7 @@ private:
 	Input* InputManager;
 	UI*    UIManager;
 	ScriptingCore* ScriptManager;
-	CoreManager*		GraphicsManager;
+
 
 
 public:
@@ -34,7 +34,7 @@ public:
 	MainCore(void);
 	~MainCore(void);
 
-	void Startup(HWND hWnd, int width, int height, bool windowed);
+	void Startup(HWND hWnd);
 	void Update(Entity* enemy, int gameState);
 	void Shutdown();
 	MessageManager* GetMessageManager();
@@ -47,6 +47,5 @@ public:
 	Input* GetInputManager();
 	UI* GetUIManager();
 	ScriptingCore* GetScriptManager();
-	CoreManager* GetGraphicsManager();
 
 };

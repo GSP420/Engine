@@ -1,12 +1,16 @@
 #include "MainCore.h"
 #include <iostream>
+#include"Meshes.h"
+#include"Material.h"
+#include"Camera.h"
+#include"Text.h"
 using namespace std;
 
 //window handle
 HWND hWnd;
 HINSTANCE dInstance;
 bool running;
-
+stringstream msgbuffer;
 //graphics stuff
 LPDIRECT3D9			pD3DObject;
 LPDIRECT3DDEVICE9	pD3DDevice;
@@ -115,15 +119,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	int height;
 	bool windowed;
 
-	//default window size
-	width = 1920;
-	height = 1080;
-	windowed = true;
+	
 
-	Init(width, height);
-	//create engine, using MainCore to instantiate a singelton of each otehr core
+	
+	//create engine, using MainCore
 	MainCore* main_core = new MainCore();
-	main_core->Startup(hWnd, width, height, windowed);
+	main_core->Startup(hWnd);
 
 	//create pointer to access each core through MainCore
 	AISystem* ai_core = main_core->GetAIManager();
@@ -136,7 +137,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	EntityManager* entity_core = main_core->GetEntityManager();
 	Clock* clock_manager = main_core->GetClock();
 
-	
+	width = script_core->width;
+	height = script_core->height;
+	windowed = true;
+	Init(width, height);
 	/*
 	TO DO IN CASE 2
 	setup UI and Graphics for game logic
@@ -157,6 +161,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		rot[i] = 0;
 		scale[i] = .1;
 	}
+	rot[0] = 180;
 
 	//setup for player
 	//DO SOMETHING HERE
@@ -169,7 +174,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	player->agentData.setPosition(pos);
 	player->agentData.setRotation(rot);
 	player->agentData.setScale(scale);
-	physics_core->setAABB(D3DXVECTOR3(/*FILL IN*/), D3DXVECTOR3(/*FILL IN*/), "player");
+	physics_core->setAABB(D3DXVECTOR3(-3, 2.5, 20), D3DXVECTOR3(-3.01, 2.51, 20.01), true, "player");
 	ai_core->regeisterPlayer(&player->agentData);
 
 	//setup for enemy
@@ -183,7 +188,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	enemy->agentData.setPosition(pos);
 	enemy->agentData.setRotation(rot);
 	enemy->agentData.setScale(scale);
-	physics_core->setAABB(D3DXVECTOR3(/*FILL IN*/), D3DXVECTOR3(/*FILL IN*/), "enemy");
+	physics_core->setAABB(D3DXVECTOR3(-3, 2.5, 20), D3DXVECTOR3(-3.01, 2.51, 20.01), true, "enemy");
 	ai_core->registerAgent(&enemy->agentData); //look at removing the 0 here for a behavior isnt needed as AI sits, it automatically cycles through all states of an enemy already
 			
 			
@@ -198,7 +203,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	platform->agentData.setPosition(pos);
 	platform->agentData.setRotation(rot);
 	platform->agentData.setScale(scale);
-	physics_core->setAABB(D3DXVECTOR3(/*FILL IN*/), D3DXVECTOR3(/*FILL IN*/), "platform");
+	physics_core->setAABB(D3DXVECTOR3(0, 0, 20), D3DXVECTOR3(0.01, 0.01, 20.01), true,  "platform");
 	
 	//load the mesh model to use
 	Meshes cube;
@@ -253,121 +258,83 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     msg.message = WM_NULL;
 	char str[128];
 	RECT rect;
-
-	while(msg.message != WM_QUIT)
+	sound_core->Play(false);
+	if(clock_manager->GetFPS() < 60)
 	{
-		// If there are Window messages then process them.
-		if(PeekMessage( &msg, 0, 0, 0, PM_REMOVE ))
+		while(msg.message != WM_QUIT)
 		{
-            TranslateMessage( &msg );
-            DispatchMessage( &msg );
-		}
-		// Otherwise, do animation/game stuff.
-		else
-        {
-			switch(gameState)
+			// If there are Window messages then process them.
+			if(PeekMessage( &msg, 0, 0, 0, PM_REMOVE ))
 			{
-			case (1)://menu state
-				/*
-				TO DO IN CASE 1
-				setup menu with UI and Graphics
-				update
-				render
-				loop till user input to change gamestate
-				*/
-				//DO SOMETHING HERE
-				
-				pD3DDevice->BeginScene();
-				pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0) , 1.0f, 0);
-				
-				GetClientRect(hWnd, &rect);
-				sprintf(str, "Engine Demo");
-				pFont->DrawText(NULL, str, -1, &rect,
-						DT_TOP | DT_CENTER | DT_NOCLIP , D3DCOLOR_ARGB(255, 
-						255, 
-						255, 
-						255			
-						));
-
-				gText.DisplayText("Play Demo - (1)", width / 2, height * 0.25f, 50, 25, WHITE);
-				gText.DisplayText("Credits - (2)", width / 2, height * 0.5f, 50, 25, WHITE);
-				gText.DisplayText("Exit Demo - (3)", width / 2, height * 0.75f, 50, 25, WHITE);
-				pD3DDevice->EndScene();
-				pD3DDevice->Present(0, 0, 0, 0);
-				main_core->Update(enemy, gameState);
-
-				if(input_core->OnePressed())
+		       TranslateMessage( &msg );
+		        DispatchMessage( &msg );
+			}
+			// Otherwise, do animation/game stuff.
+			else
+	     {
+				switch(gameState)
 				{
-					gameState = 2;
-				}
-
-				if(input_core->TwoPressed())
-				{
-					gameState = 3;
-				}
-
-				if(input_core->ThreePressed())
-				{
-					gameState = 4;
-				}
-
-				break;
-			case (2)://game logic state
-				float temp[3];
-				float temp2[3];
-				player->agentData.getPosition(temp);
-				if(temp[1] <= 101)
-					jump = false;
-
-				if(input_core->EscPressed()) gameState = 1;
-
-				if(input_core->APressed())
-				{
-					player->agentData.getPosition(temp);
-					player->agentData.getAcceleration(temp2);
-					temp[0] -= .2f;
-					player->agentData.setPosition(temp);
+				case (1)://menu state
 					/*
-					temp2[0] -= .1f;
-					physics_core->setAccel(temp2, "player");
-					D3DXVECTOR3 vec;
-					vec = physics_core->getVel("player");
-					player->agentData.setAcceleration(temp2);
-					temp[0] += vec.x;
-					temp[1] += vec.y;
-					temp[2] += vec.z;
-					player->agentData.setPosition(temp);
+					TO DO IN CASE 1
+					setup menu with UI and Graphics
+					update
+					render
+					loop till user input to change gamestate
 					*/
-				}
-
-				if(input_core->DPressed())
-				{
-					player->agentData.getPosition(temp);
-					player->agentData.getAcceleration(temp2);
-					temp[0] += .2f;
-					player->agentData.setPosition(temp);
-					/*
-					temp2[0] += .1f;
-					physics_core->setAccel(temp2, "player");
-					D3DXVECTOR3 vec;
-					vec = physics_core->getVel("player");
-					player->agentData.setAcceleration(temp2);
-					temp[0] += vec.x;
-					temp[1] += vec.y;
-					temp[2] += vec.z;
-					player->agentData.setPosition(temp);
-					*/
-				}
-
-				if(!jump)
-				{
-					if(input_core->SpaceBar())
+					//DO SOMETHING HERE
+					
+					pD3DDevice->BeginScene();
+					pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0) , 1.0f, 0);
+				
+					GetClientRect(hWnd, &rect);
+					sprintf(str, "Engine Demo");
+					pFont->DrawText(NULL, str, -1, &rect,
+							DT_TOP | DT_CENTER | DT_NOCLIP , D3DCOLOR_ARGB(255, 
+							255, 
+							255, 
+							255			
+							));
+					gText.DisplayText("Play Demo - (1)", width / 2, height * 0.25f, 50, 25, WHITE);
+					gText.DisplayText("Credits - (2)", width / 2, height * 0.5f, 50, 25, WHITE);
+					gText.DisplayText("Exit Demo - (3)", width / 2, height * 0.75f, 50, 25, WHITE);
+					pD3DDevice->EndScene();
+					pD3DDevice->Present(0, 0, 0, 0);
+					main_core->Update(enemy, gameState);
+					if(input_core->OnePressed())
 					{
-						jump = true;
+						gameState = 2;
+					}
+
+					if(input_core->TwoPressed())
+					{
+						gameState = 3;
+					}
+
+					if(input_core->ThreePressed())
+					{
+						gameState = 4;
+					}
+
+					break;
+				case (2)://game logic state
+					float temp[3];
+					float temp2[3];
+					player->agentData.getPosition(temp);
+					if(temp[1] <= 101)
+						jump = false;
+
+					if(input_core->EscPressed()) gameState = 1;
+
+					if(input_core->APressed())
+					{
 						player->agentData.getPosition(temp);
 						player->agentData.getAcceleration(temp2);
+						temp[0] -= .2f;
+						player->agentData.setPosition(temp);
+						sfx_core->Play();
 						/*
-						temp2[1] += 1.0f;
+						temp2[0] -= .1f;
 						physics_core->setAccel(temp2, "player");
 						D3DXVECTOR3 vec;
 						vec = physics_core->getVel("player");
@@ -378,99 +345,153 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 						player->agentData.setPosition(temp);
 						*/
 					}
-				}
 
-				//update
-				main_core->Update(enemy, gameState);
+					if(input_core->DPressed())
+					{
+						player->agentData.getPosition(temp);
+						player->agentData.getAcceleration(temp2);
+						temp[0] += .2f;
+						player->agentData.setPosition(temp);
+						sfx_core->Play();
+						/*
+						temp2[0] += .1f;
+						physics_core->setAccel(temp2, "player");
+						D3DXVECTOR3 vec;
+						vec = physics_core->getVel("player");
+						player->agentData.setAcceleration(temp2);
+						temp[0] += vec.x;
+						temp[1] += vec.y;
+						temp[2] += vec.z;
+						player->agentData.setPosition(temp);
+						*/
+					}
 
-				
-				if (Wireframe)
-				{
-					pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-				}
-				else
-				{
-					pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-				}
-				pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0) , 1.0f, 0);
-				camera.dxSetProjection(pD3DDevice);
-				camera.dxSetView(pD3DDevice);
-				pD3DDevice->BeginScene();
+					if(!jump)
+					{
+						if(input_core->SpaceBar())
+						{
+							jump = true;
+							player->agentData.getPosition(temp);
+							player->agentData.getAcceleration(temp2);
+							/*
+							temp2[1] += 1.0f;
+							physics_core->setAccel(temp2, "player");
+							D3DXVECTOR3 vec;
+							vec = physics_core->getVel("player");
+							player->agentData.setAcceleration(temp2);
+							temp[0] += vec.x;
+							temp[1] += vec.y;
+							temp[2] += vec.z;
+							player->agentData.setPosition(temp);
+							*/
+						}
+					}
 
-				enemy->agentData.getPosition(pos);
-				enemy->agentData.getScale(scale);
-				enemy->agentData.getRotation(rot);
-				cube.set_meshes(pos, rot, scale);
-				cube.draw_meshes(pD3DDevice);
+					//update
+					main_core->Update(enemy, gameState);
 
-				player->agentData.getPosition(pos);
-				player->agentData.getScale(scale);
-				player->agentData.getRotation(rot);
-				cube.set_meshes(pos, rot, scale);
-				cube.draw_meshes(pD3DDevice);
+for(int i = 0; i < physics_core->Core._collisions->length();i++)
+{
+//Pop the next collision off the stack:
+physics_core->Core._collisions->getNext();
+msgbuffer << physics_core->Core._collisions->currentCollision.boxA_ID;
+msgbuffer << " is colliding with ";
+msgbuffer << physics_core->Core._collisions->currentCollision.boxB_ID;
+msgbuffer << "!\n";
 
-				platform->agentData.getPosition(pos);
-				platform->agentData.getScale(scale);
-				platform->agentData.getRotation(rot);
-				cube.set_meshes(pos, rot, scale);
-				cube.draw_meshes(pD3DDevice);
-
-				GetClientRect(hWnd, &rect);
-				sprintf(str, "GSP 420 Running Demo");
-				pFont->DrawText(NULL, str, -1, &rect,
-						DT_TOP | DT_LEFT | DT_NOCLIP , D3DCOLOR_ARGB(255, 
-						255, 
-						255, 
-						255			
-						));
-				pD3DDevice->EndScene();
-				pD3DDevice->Present(0, 0, 0, 0);
-				break;
-			case (3)://credits state
-				//setup credits with UI and Graphics
-				//loop till gameState changes
-				//update
-				pD3DDevice->BeginScene();
-				pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(122, 0, 0) , 1.0f, 0);
-				
-				GetClientRect(hWnd, &rect);
-
-				pFont->DrawText(NULL, str, -1, &rect,
-						DT_TOP | DT_CENTER | DT_NOCLIP , D3DCOLOR_ARGB(255, 
-						255, 
-						255, 
-						255			
-						));
-
-				gText.DisplayText("CREDITS:", width / 2, 35, 50, 25, WHITE);
-
-				for (int i = 0; i < AUTHORS; i++)
-				{
-					gText.DisplayText(authors[i], width / 2, i * 25 + 60, 100, 10, WHITE);
-				}
-
-				
-				pD3DDevice->EndScene();
-				pD3DDevice->Present(0, 0, 0, 0);
-				main_core->Update(enemy, gameState);
-
-				if(input_core->EscPressed()) gameState = 1;
-
-				break;
-			case (4):	//shutdown application
-				//shutdown
-				main_core->Shutdown();
-				pD3DDevice->Release();
-				pD3DObject->Release();
-				//destroy application
-				msg.message = WM_QUIT;
-				break;
-			}
-		}	
-	}
-	return (int)msg.wParam;
+char * tempString = new char[msgbuffer.str().length() + 1];
+strcpy(tempString, msgbuffer.str().c_str());
+//Sample collision handling (this just prints which box ID's are colliding in the output window in visual studio)
+OutputDebugString(tempString);
 }
+				
+					if (Wireframe)
+					{
+						pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+					}
+					else
+					{
+						pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+					}
+					pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0) , 1.0f, 0);
+					camera.dxSetProjection(pD3DDevice);
+					camera.dxSetView(pD3DDevice);
+					pD3DDevice->BeginScene();
 
+					enemy->agentData.getPosition(pos);
+					enemy->agentData.getScale(scale);
+					enemy->agentData.getRotation(rot);
+					cube.set_meshes(pos, rot, scale);
+					cube.draw_meshes(pD3DDevice);
+
+					player->agentData.getPosition(pos);
+					player->agentData.getScale(scale);
+					player->agentData.getRotation(rot);
+					cube.set_meshes(pos, rot, scale);
+					cube.draw_meshes(pD3DDevice);
+
+					platform->agentData.getPosition(pos);
+					platform->agentData.getScale(scale);
+					platform->agentData.getRotation(rot);
+					cube.set_meshes(pos, rot, scale);
+					cube.draw_meshes(pD3DDevice);
+
+					GetClientRect(hWnd, &rect);
+					sprintf(str, "GSP 420 Running Demo");
+					pFont->DrawText(NULL, str, -1, &rect,
+							DT_TOP | DT_LEFT | DT_NOCLIP , D3DCOLOR_ARGB(255, 
+							255, 
+							255, 
+							255			
+							));
+					pD3DDevice->EndScene();
+					pD3DDevice->Present(0, 0, 0, 0);
+					break;
+				case (3)://credits state
+					//setup credits with UI and Graphics
+					//loop till gameState changes
+					//update
+					pD3DDevice->BeginScene();
+					pD3DDevice->Clear(0, 0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(122, 0, 0) , 1.0f, 0);
+				
+					GetClientRect(hWnd, &rect);
+
+					pFont->DrawText(NULL, str, -1, &rect,
+							DT_TOP | DT_CENTER | DT_NOCLIP , D3DCOLOR_ARGB(255, 
+							255, 
+							255, 
+							255			
+							));
+
+					gText.DisplayText("CREDITS:", width / 2, 35, 50, 25, WHITE);
+
+					for (int i = 0; i < AUTHORS; i++)
+					{
+						gText.DisplayText(authors[i], width / 2, i * 25 + 60, 100, 10, WHITE);
+					}
+
+				
+					pD3DDevice->EndScene();
+					pD3DDevice->Present(0, 0, 0, 0);
+					main_core->Update(enemy, gameState);
+
+					if(input_core->EscPressed()) gameState = 1;
+
+					break;
+				case (4):	//shutdown application
+					//shutdown
+					main_core->Shutdown();
+					pD3DDevice->Release();
+					pD3DObject->Release();
+					//destroy application
+					msg.message = WM_QUIT;
+					break;
+				}
+			}	
+		}
+		return (int)msg.wParam;
+	}
+}
 void Init(int width, int height) 
 {
 	// create direct3d object

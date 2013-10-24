@@ -76,7 +76,7 @@ public:
 	void setVel(D3DXVECTOR3 Vel, string ID);
 	D3DXVECTOR3 getVel(string ID);
 
-private:
+
 	PhysicsCore Core;
 	PhysicsCollision collide;
 	float timeUntilUpdate;

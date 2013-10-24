@@ -20,8 +20,8 @@ void Wander::enact()
 	// generate a random spot to move too
 	float randomOffset[3];
 	randomOffset[0] = getRandomPosition();
-	randomOffset[1] = getRandomPosition();
-	randomOffset[2] = getRandomPosition();
+	randomOffset[1] = 2.5;
+	randomOffset[2] = 20;
 
 	// seek to that spot
 	Steering::Seek(self,randomOffset);

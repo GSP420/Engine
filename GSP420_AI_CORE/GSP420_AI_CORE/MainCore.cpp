@@ -8,7 +8,7 @@ MainCore::~MainCore(void)
 {
 }
 
-void MainCore::Startup(HWND hWnd, int width, int height, bool windowed)
+void MainCore::Startup(HWND hWnd)
 {
 	this->messageManager = new MessageManager();
 	this->entityManager = new EntityManager();
@@ -26,13 +26,8 @@ void MainCore::Startup(HWND hWnd, int width, int height, bool windowed)
 	this->InputManager = new Input();
 	this->InputManager->Startup(hWnd);
 
-	//this->ScriptManager = new ScriptingCore();
-	//this->ScriptManager->Startup();
-
-	this->GraphicsManager = new CoreManager();
-	this->GraphicsManager->DXInit(hWnd, width, height, windowed);
-	
-
+	this->ScriptManager = new ScriptingCore();
+	this->ScriptManager->Startup();
 }
 
 void MainCore::Update(Entity* enemy, int gameState)
@@ -67,12 +62,9 @@ void MainCore::Update(Entity* enemy, int gameState)
 		
 	}
 	this->InputManager->Update();
-	this->ScriptManager->Update();
 	this->clock->EndUpdate();
 	this->clock->EndUpdate();
 	this->clock->StartRender();
-	// update gfx core
-	this->GraphicsManager->Update();
 	this->clock->EndRender();
 
 	
@@ -100,4 +92,3 @@ PhysicsInterface* MainCore::GetPhysicsManager() {return this->PhysicsManager;}
 Input* MainCore::GetInputManager() {return this->InputManager;}
 UI* MainCore::GetUIManager() {return this->UIManager;}
 ScriptingCore* MainCore::GetScriptManager() {return this->ScriptManager;}
-CoreManager* MainCore::GetGraphicsManager() {return this->GraphicsManager;}

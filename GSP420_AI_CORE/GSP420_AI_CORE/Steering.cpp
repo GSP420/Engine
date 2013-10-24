@@ -11,13 +11,35 @@ void Steering::MatchVelocity(Agent* currentAgent, Agent* targetAgent)
 void Steering::Seek(Agent* currentAgent, Agent* targetAgent)
 {
 	float targetPosition[3];
+	float currentPosition[3];
 	targetAgent->getPosition(targetPosition);
-	currentAgent->setDestination(targetPosition);
+	currentAgent->getPosition(currentPosition);
+	if((currentPosition[0] - targetPosition[0]) < 0)
+	{
+		targetPosition[0] -= .2;
+		currentAgent->setPosition(targetPosition);
+	}
+	else
+	{
+		targetPosition[0] += .2;
+		currentAgent->setPosition(targetPosition);
+	}
 }
 
 void Steering::Seek(Agent* currentAgent, float targetPosition[3])
 {
-	currentAgent->setDestination(targetPosition);
+	float currentPosition[3];
+	currentAgent->getPosition(currentPosition);
+	if((currentPosition[0] - targetPosition[0]) < 0)
+	{
+		targetPosition[0] -= .2;
+		currentAgent->setPosition(targetPosition);
+	}
+	else
+	{
+		targetPosition[0] += .2;
+		currentAgent->setPosition(targetPosition);
+	}
 }
 
 void Steering::Flee(Agent* currentAgent, Agent* targetAgent)
@@ -34,9 +56,9 @@ void Steering::Flee(Agent* currentAgent, Agent* targetAgent)
 
 	float fleeVector[3];
 
-	fleeVector[0] = ((xDirection) ? selfPosition[0] + 5 : selfPosition[0] - 5); 
-	fleeVector[1] = ((yDirection) ? selfPosition[1] + 5 : selfPosition[1] - 5);
-	fleeVector[2] = ((zDirection) ? selfPosition[2] + 5 : selfPosition[2] - 5);
+	fleeVector[0] = ((xDirection) ? selfPosition[0] + .2 : selfPosition[0] - .2); 
+	fleeVector[1] = ((yDirection) ? selfPosition[1] + 0 : selfPosition[1] - 0);
+	fleeVector[2] = ((zDirection) ? selfPosition[2] + 0 : selfPosition[2] - 0);
 
 	currentAgent->setDestination(fleeVector);
 }
@@ -61,8 +83,8 @@ void Steering::Arrive(Agent* currentAgent, Agent* targetAgent)
 		else distanceToTargetAgent[i] = 0.0f;
 	}
 
-	float slow = 1.0f, fast = 3.0f;						//Speeds need to be adjusted once a base speed is decided upon			?????
-	float close = 1.0f, far = 10.0f;					//Distances need to be determined once a unit distance is decided upon	?????
+	float slow = .1f, fast = .2f;						//Speeds need to be adjusted once a base speed is decided upon			?????
+	float close = .5f, far = 2.0f;					//Distances need to be determined once a unit distance is decided upon	?????
 
 	// set speed in 3 dimensions based on distance in the 3 dimensions
 	float arriveVelocity[3] = {0.0f, 0.0f, 0.0f};

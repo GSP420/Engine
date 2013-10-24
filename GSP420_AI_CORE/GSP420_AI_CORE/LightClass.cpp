@@ -1,6 +1,4 @@
-
 #include "LightClass.h"
-#include "CoreManager.h"
 
 
 

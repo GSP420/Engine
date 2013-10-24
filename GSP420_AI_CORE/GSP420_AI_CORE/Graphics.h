@@ -14,7 +14,6 @@
 #include "Material.h"
 #include "Meshes.h"
 #include "Text.h"
-#include "DXManager.h"
 #include "LightClass.h"
 
 
