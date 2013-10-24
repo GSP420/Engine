@@ -27,8 +27,8 @@ void Wander::enact()
 	Steering::Seek(self,randomOffset);
 
 	//debug logging
-		std::cout << "Enemy position: " << randomOffset[0] << " , " << randomOffset[1] << " , " << randomOffset[2] << std::endl;
-		system("pause");
+		//std::cout << "Enemy position: " << randomOffset[0] << " , " << randomOffset[1] << " , " << randomOffset[2] << std::endl;
+		//system("pause");
 	//end debug logging
 }
 

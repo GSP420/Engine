@@ -174,7 +174,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//setup for enemy
 	//DO SOMETHING HERE
-	Behavior* wtf = "wtf";
 	Entity* enemy;
 	enemy = new Entity;
 	enemy->SetEntity("enemy", "basic");
@@ -185,7 +184,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	enemy->agentData.setRotation(rot);
 	enemy->agentData.setScale(scale);
 	physics_core->setAABB(D3DXVECTOR3(/*FILL IN*/), D3DXVECTOR3(/*FILL IN*/), "enemy");
-	ai_core->registerAgent(GenericEnemy(&enemy->agentData), ); //look at removing the 0 here for a behavior isnt needed as AI sits, it automatically cycles through all states of an enemy already
+	ai_core->registerAgent(&enemy->agentData); //look at removing the 0 here for a behavior isnt needed as AI sits, it automatically cycles through all states of an enemy already
 			
 			
 	//setup for platforms
