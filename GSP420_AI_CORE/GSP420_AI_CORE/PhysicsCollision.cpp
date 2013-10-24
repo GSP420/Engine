@@ -49,8 +49,7 @@ bool PhysicsCollision::sweptCCD(int boxIndex, vector<AABB*> boxes, Octree* octre
 	{
 		AABBPair bp = bps[i];
 		AABB* boxA = bp.aabb1;
-		AABB* boxB = bp.aabb2
-			;
+		AABB* boxB = bp.aabb2;
 		if(i == boxIndex)
 		{
 			//skip this check
